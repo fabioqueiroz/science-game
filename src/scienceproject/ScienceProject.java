@@ -1,68 +1,50 @@
 package scienceproject;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
+//import java.util.ArrayList;
+//import java.util.Random;
 
-import com.sun.javafx.sg.prism.NGImageView;
-
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ScienceProject extends Application 
+@SuppressWarnings("rawtypes")
+public class ScienceProject extends Application implements EventHandler
 {	
 	Pane root;
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
+	Button waterButton;
 //	BackgroundImage bgImage = new BackgroundImage(new Image("resources/garden.PNG",32,32,false,true),
 //	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 //	        BackgroundSize.DEFAULT);
 	
-
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	Random rnd = new Random(System.currentTimeMillis());
-	int count = 0;
-	
-	AnimationTimer timer = new AnimationTimer() 
-	{
-
-		@Override
-		public void handle(long arg0) 
-		{
-			gc.setFill(Color.MEDIUMSEAGREEN);
-			gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-			
-			if(count++ > 10) 
-			{
-				gameObjects.add(new Seed(rnd.nextInt(1200),rnd.nextInt(800), gc));
-				count = 0;
-			}
-			
-			for (GameObject gameObject : gameObjects) 
-			{
-				((Seed)gameObject).grow();
-			}
-			
-		}
-		
-	};
 	
 	public static void main(String[] args) 
 	{
 		launch(args);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void start(Stage stage) throws Exception 
 	{
+		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
+		
 		root = new Pane();
 		scene = new Scene(root,1200,800);
+		scene.getStylesheets().add(stylesheet);
+		
+		stage.setTitle("Growing plants");
 		stage.setScene(scene);
 		stage.show();
 		
@@ -70,14 +52,33 @@ public class ScienceProject extends Application
 		gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.MEDIUMSEAGREEN);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-			
-		root.getChildren().add(canvas);
 		
+		waterButton = new Button("Water");
+		waterButton.setLayoutX(200);
+		waterButton.setLayoutY(500);
+		waterButton.setOnAction(this);
 		
-		timer.start();
+		gameObjects.add(new Seed(800,300, gc));
+		
+		//root.getChildren().add(canvas);	
+		root.getChildren().addAll(canvas, waterButton);
+						
+	}
+
+	@Override
+	public void handle(Event event) 
+	{
+	
+		if(event.getSource() == this.waterButton)
+		{
+
+			for (GameObject gameObject : gameObjects) 
+			{
+				((Seed)gameObject).changeGrowthStage();
+			}
+		}	
 		
 	}
-	
-	
+		
 
 }

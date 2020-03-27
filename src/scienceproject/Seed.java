@@ -13,7 +13,7 @@ public class Seed extends GameObject implements PlantInterface
 	{
 		super(x, y, gc);
 		image = new Image(Seed.class.getResource("/resources/seed2.PNG").toExternalForm());
-		super.update();
+		//super.update();
 		plantInterface = this;
 		update();
 	}
@@ -27,19 +27,19 @@ public class Seed extends GameObject implements PlantInterface
 	public void update() 
 	{
 
-		x++;	
-		x += dx;
-		if(x>800)
-			dx=-1;
-		if(x<0)
-			dx=1;
-		y+=dy;
-		if(y>600)
-			dy=-1;
-		if(y<0)
-			dy=1;
+//		x++;	
+//		x += dx;
+//		if(x>800)
+//			dx=-1;
+//		if(x<0)
+//			dx=1;
+//		y+=dy;
+//		if(y>600)
+//			dy=-1;
+//		if(y<0)
+//			dy=1;
 
-		gc.drawImage(image, x, y, 30, 30);
+		gc.drawImage(image, x, y, 120, 100);
 		
 	}
 	
@@ -50,6 +50,28 @@ public class Seed extends GameObject implements PlantInterface
 			plantInterface = new Sprout(x,y,gc);
 		if(age == 200)
 			plantInterface = new Sprout(x,y,gc);
+		
+		plantInterface.update();	
+	}
+	
+	public void changeGrowthStage() 
+	{
+		age += 1;
+		
+		if (age == 2) 
+		{
+			plantInterface = new Sprout(x,y,gc);
+		}
+		
+		if (age == 4) 
+		{
+			plantInterface = new YoungPlant(x,y,gc);
+		}
+		
+		if (age == 6) 
+		{
+			plantInterface = new AdultPlant(x,y,gc);
+		}
 		
 		plantInterface.update();	
 	}
