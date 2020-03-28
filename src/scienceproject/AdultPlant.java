@@ -18,8 +18,9 @@ public class AdultPlant extends GameObject implements PlantInterface
 	@Override
 	public void update() 
 	{
-		gc.drawImage(image, x, y, 140, 200);
-		
+
+		gc.drawImage(image, x, y-100, 140, 200);
+
 	}
 
 }

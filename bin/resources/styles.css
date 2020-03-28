@@ -1,5 +1,14 @@
+.root {
+	-fx-background-image: url("/resources/garden.PNG");	
+	-fx-background-repeat: stretch;
+}
+
 .button {
 	-fx-font-size: 25px;
 	-fx-background-color: red;
 	-fx-text-fill: white;
+}
+
+.button:hover{
+    -fx-background-color: blue;
 }

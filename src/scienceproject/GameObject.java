@@ -9,7 +9,7 @@ public class GameObject implements PlantInterface
 	protected Image image;
 	protected double x, y;
 	protected GraphicsContext gc;
-	//protected double dx = 1, dy = 1;
+	protected double dx = 1, dy = 1;
 	
 	public GameObject(double x, double y, GraphicsContext gc) 
 	{

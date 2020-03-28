@@ -11,8 +11,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
@@ -23,9 +30,9 @@ public class ScienceProject extends Application implements EventHandler
 	Canvas canvas;
 	GraphicsContext gc;
 	Button waterButton;
-//	BackgroundImage bgImage = new BackgroundImage(new Image("resources/garden.PNG",32,32,false,true),
-//	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-//	        BackgroundSize.DEFAULT);
+	BackgroundImage bgImage = new BackgroundImage(new Image("/resources/garden.PNG",32,32,false,true),
+	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	        BackgroundSize.DEFAULT);
 	
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	
@@ -41,9 +48,19 @@ public class ScienceProject extends Application implements EventHandler
 		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
 		
 		root = new Pane();
+		//root.setBackground(new Background(bgImage));
+		//root.setStyle("-fx-background-image: url('/resources/garden.PNG');");
+		
+//		String image = ScienceProject.class.getResource("/resources/garden.PNG").toExternalForm();
+//		root.setStyle("-fx-background-image: url('" + image + "'); " +
+//		           "-fx-background-position: center center; " +
+//		           "-fx-background-repeat: stretch;");
+		
+		
 		scene = new Scene(root,1200,800);
 		scene.getStylesheets().add(stylesheet);
-		
+
+	
 		stage.setTitle("Growing plants");
 		stage.setScene(scene);
 		stage.show();
@@ -56,7 +73,7 @@ public class ScienceProject extends Application implements EventHandler
 		waterButton = new Button("Water");
 		waterButton.setLayoutX(200);
 		waterButton.setLayoutY(500);
-		waterButton.setOnAction(this);
+				waterButton.setOnAction(this);
 		
 		gameObjects.add(new Seed(800,300, gc));
 		
