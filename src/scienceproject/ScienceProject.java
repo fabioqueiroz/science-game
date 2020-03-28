@@ -1,9 +1,7 @@
 package scienceproject;
 
 import java.util.*;
-//import java.util.ArrayList;
-//import java.util.Random;
-
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -19,7 +17,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
@@ -35,6 +32,40 @@ public class ScienceProject extends Application implements EventHandler
 	        BackgroundSize.DEFAULT);
 	
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
+	
+	Random rnd = new Random(System.currentTimeMillis());
+	int count = 0;
+	
+	AnimationTimer timer = new AnimationTimer() 
+	{
+
+		@Override
+		public void handle(long arg0) 
+		{
+
+			if(count++ > 10) 
+			{
+				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
+				count = 0;
+			}
+			
+			for (GameObject droplet : droplets) 
+			{
+				((WaterDroplet)droplet).move();
+				
+//				if (((WaterDroplet)droplet).getX() >= 800) 
+//				{
+//					((WaterDroplet)droplet).move();
+//					
+//					System.out.println(((WaterDroplet)droplet).getX());
+//				}
+			}
+			
+						
+		}
+		
+	};
 	
 	public static void main(String[] args) 
 	{
@@ -67,17 +98,16 @@ public class ScienceProject extends Application implements EventHandler
 		
 		canvas = new Canvas(1200,800);
 		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.MEDIUMSEAGREEN);
+		gc.setFill(Color.WHITE); //MEDIUMSEAGREEN
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
 		waterButton = new Button("Water");
 		waterButton.setLayoutX(200);
-		waterButton.setLayoutY(500);
-				waterButton.setOnAction(this);
+		waterButton.setLayoutY(700);
+		waterButton.setOnAction(this);
 		
-		gameObjects.add(new Seed(800,300, gc));
+		gameObjects.add(new Seed(200,400, gc));
 		
-		//root.getChildren().add(canvas);	
 		root.getChildren().addAll(canvas, waterButton);
 						
 	}
@@ -93,6 +123,8 @@ public class ScienceProject extends Application implements EventHandler
 			{
 				((Seed)gameObject).changeGrowthStage();
 			}
+			
+			timer.start();
 		}	
 		
 	}

@@ -17,20 +17,7 @@ public class Sprout extends GameObject implements PlantInterface
 	@Override
 	public void update() 
 	{
-//		x++;	
-//		x += dx;
-//		if(x>800)
-//			dx=-2;
-//		if(x<0)
-//			dx=2;
-//		y+=dy;
-//		if(y>600)
-//			dy=-2;
-//		if(y<0)
-//			dy=2;
-
 		gc.drawImage(image, x, y, 120, 100);
-		
 	}
 
 }

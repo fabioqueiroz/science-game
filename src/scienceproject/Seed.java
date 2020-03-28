@@ -58,6 +58,7 @@ public class Seed extends GameObject implements PlantInterface
 	{
 		age += 1;
 		
+
 		if (age == 2) 
 		{
 			plantInterface = new Sprout(x,y,gc);
