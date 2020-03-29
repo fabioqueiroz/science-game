@@ -49,19 +49,37 @@ public class ScienceProject extends Application implements EventHandler
 				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
 				count = 0;
 			}
+		
+//			for (GameObject droplet : droplets) 
+//			{
+//				((WaterDroplet)droplet).move();
+//			}
+//			
 			
-			for (GameObject droplet : droplets) 
+			for (GameObject droplet : droplets) // droplet.getRectangle().getBoundsInParent()
 			{
-				((WaterDroplet)droplet).move();
 				
-//				if (((WaterDroplet)droplet).getX() >= 800) 
-//				{
-//					((WaterDroplet)droplet).move();
-//					
-//					System.out.println(((WaterDroplet)droplet).getX());
-//				}
-			}
-			
+				for (GameObject gameObject : gameObjects) 
+				{
+					if (gameObject.getRectangle()
+							.intersects(droplet.getX(), droplet.getY() - 100, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
+					{
+						((WaterDroplet)droplet).changeToBlankImage();
+						System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
+						System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
+
+					} 
+
+
+					else 
+					{
+						((WaterDroplet)droplet).move();
+
+					}
+				}
+	
+				
+			}	
 						
 		}
 		
@@ -79,18 +97,8 @@ public class ScienceProject extends Application implements EventHandler
 		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
 		
 		root = new Pane();
-		//root.setBackground(new Background(bgImage));
-		//root.setStyle("-fx-background-image: url('/resources/garden.PNG');");
-		
-//		String image = ScienceProject.class.getResource("/resources/garden.PNG").toExternalForm();
-//		root.setStyle("-fx-background-image: url('" + image + "'); " +
-//		           "-fx-background-position: center center; " +
-//		           "-fx-background-repeat: stretch;");
-		
-		
 		scene = new Scene(root,1200,800);
 		scene.getStylesheets().add(stylesheet);
-
 	
 		stage.setTitle("Growing plants");
 		stage.setScene(scene);
@@ -98,7 +106,7 @@ public class ScienceProject extends Application implements EventHandler
 		
 		canvas = new Canvas(1200,800);
 		gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.WHITE); //MEDIUMSEAGREEN
+		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
 		waterButton = new Button("Water");
@@ -108,7 +116,7 @@ public class ScienceProject extends Application implements EventHandler
 		
 		gameObjects.add(new Seed(200,400, gc));
 		
-		root.getChildren().addAll(canvas, waterButton);
+        root.getChildren().addAll(canvas, waterButton);
 						
 	}
 

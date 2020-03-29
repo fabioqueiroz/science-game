@@ -3,6 +3,7 @@ package scienceproject;
 import Interfaces.PlantInterface;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class Seed extends GameObject implements PlantInterface
 {
@@ -13,7 +14,7 @@ public class Seed extends GameObject implements PlantInterface
 	{
 		super(x, y, gc);
 		image = new Image(Seed.class.getResource("/resources/seed2.PNG").toExternalForm());
-		//super.update();
+		rectangle = new Rectangle(x, y, image.getWidth(), image.getHeight());
 		plantInterface = this;
 		update();
 	}
@@ -21,6 +22,16 @@ public class Seed extends GameObject implements PlantInterface
 	public int getAge() 
 	{
 		return age;
+	}
+	
+	public double getPlantHeight()
+	{
+		return this.x;
+	}
+	
+	public double getPlantWidth()
+	{
+		return this.y;
 	}
 	
 	@Override

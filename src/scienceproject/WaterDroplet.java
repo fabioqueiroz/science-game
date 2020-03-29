@@ -2,6 +2,7 @@ package scienceproject;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class WaterDroplet extends GameObject
 {
@@ -9,17 +10,8 @@ public class WaterDroplet extends GameObject
 	public WaterDroplet(double x, double y, GraphicsContext gc) {
 		super(x, y, gc);
 		image = new Image(Sprout.class.getResource("/resources/water-droplet.PNG").toExternalForm());
+		rectangle = new Rectangle(x, y-100, image.getWidth(), image.getHeight());
 		update();
-	}
-	
-	public double getX() 
-	{
-		return this.x;
-	}
-	
-	public double getY() 
-	{
-		return this.y;
 	}
 	
 	@Override
@@ -42,12 +34,18 @@ public class WaterDroplet extends GameObject
 			dy = 1;
 		}
 		
-//		if (y == 600) 
-//		{
-//			image = null;
-//		}
-//			
+		if (y == 580) 
+		{
+			image = changeToBlankImage();
+		}
+			
 		gc.drawImage(image, x, y-100, 30, 30);
+			
+	}
+	
+	public Image changeToBlankImage()
+	{
+		return image = new Image(Sprout.class.getResource("/resources/blank-droplet.PNG").toExternalForm());
 	}
 
 }
