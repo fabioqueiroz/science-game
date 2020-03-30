@@ -11,7 +11,7 @@ public class AdultPlant extends GameObject implements PlantInterface
 	public AdultPlant(double x, double y, GraphicsContext gc) 
 	{
 		super(x, y, gc);
-		image = new Image(Sprout.class.getResource("/resources/plant.PNG").toExternalForm());
+		image = new Image(AdultPlant.class.getResource("/resources/plant.PNG").toExternalForm());
 		rectangle = new Rectangle(x, y-100, image.getWidth(), image.getHeight());
 		update();
 	}

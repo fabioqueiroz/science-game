@@ -46,34 +46,33 @@ public class ScienceProject extends Application implements EventHandler
 
 			if(count++ > 10) 
 			{
+				droplets.add(new Cloud(rnd.nextInt(1),rnd.nextInt(1), gc));
 				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
 				count = 0;
 			}
-		
-//			for (GameObject droplet : droplets) 
-//			{
-//				((WaterDroplet)droplet).move();
-//			}
-//			
-			
+					
 			for (GameObject droplet : droplets) // droplet.getRectangle().getBoundsInParent()
 			{
 				
 				for (GameObject gameObject : gameObjects) 
 				{
-					if (gameObject.getRectangle()
-							.intersects(droplet.getX(), droplet.getY() - 100, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
+					if (gameObject.getRectangle().getLayoutBounds() 
+							.intersects(droplet.getX(), droplet.getY() - 85, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
 					{
 						((WaterDroplet)droplet).changeToBlankImage();
 						System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
 						System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
+						System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
 
 					} 
 
-
 					else 
 					{
-						((WaterDroplet)droplet).move();
+						if (droplet instanceof WaterDroplet) 
+						{						
+							((WaterDroplet)droplet).move();
+						}
+//						((WaterDroplet)droplet).move();
 
 					}
 				}
@@ -109,12 +108,14 @@ public class ScienceProject extends Application implements EventHandler
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
-		waterButton = new Button("Water");
+		waterButton = new Button("Let it rain!");
 		waterButton.setLayoutX(200);
 		waterButton.setLayoutY(700);
 		waterButton.setOnAction(this);
 		
 		gameObjects.add(new Seed(200,400, gc));
+		droplets.add(new Cloud(1, 1, gc));
+		droplets.add(new Cloud(405, 1, gc));
 		
         root.getChildren().addAll(canvas, waterButton);
 						

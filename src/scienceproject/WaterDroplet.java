@@ -4,12 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
-public class WaterDroplet extends GameObject
+public class WaterDroplet extends Cloud
 {
 
 	public WaterDroplet(double x, double y, GraphicsContext gc) {
 		super(x, y, gc);
-		image = new Image(Sprout.class.getResource("/resources/water-droplet.PNG").toExternalForm());
+		image = new Image(WaterDroplet.class.getResource("/resources/water-droplet.PNG").toExternalForm());
 		rectangle = new Rectangle(x, y-100, image.getWidth(), image.getHeight());
 		update();
 	}
@@ -39,7 +39,7 @@ public class WaterDroplet extends GameObject
 			image = changeToBlankImage();
 		}
 			
-		gc.drawImage(image, x, y-100, 30, 30);
+		gc.drawImage(image, x, y - 100, 30, 30);
 			
 	}
 	
