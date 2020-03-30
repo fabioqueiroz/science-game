@@ -1,5 +1,6 @@
 package scienceproject;
 
+import java.time.Duration;
 import java.util.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -10,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -26,7 +28,10 @@ public class ScienceProject extends Application implements EventHandler
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
-	Button waterButton;
+	Button rainButton;
+	Button daysButton;
+	boolean isRainButtonClicked;
+	int noOfDays;
 	BackgroundImage bgImage = new BackgroundImage(new Image("/resources/garden.PNG",32,32,false,true),
 	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	        BackgroundSize.DEFAULT);
@@ -51,18 +56,19 @@ public class ScienceProject extends Application implements EventHandler
 				count = 0;
 			}
 					
-			for (GameObject droplet : droplets) // droplet.getRectangle().getBoundsInParent()
+			for (GameObject droplet : droplets)
 			{
 				
 				for (GameObject gameObject : gameObjects) 
 				{
-					if (gameObject.getRectangle().getLayoutBounds() 
-							.intersects(droplet.getX(), droplet.getY() - 85, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
+					if (gameObject.getRectangle().getBoundsInParent()
+							.intersects(droplet.getX(), droplet.getY() - 80, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
 					{
 						((WaterDroplet)droplet).changeToBlankImage();
-						System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
-						System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
-						System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
+						
+						//System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
+						//System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
+						//System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
 
 					} 
 
@@ -72,11 +78,9 @@ public class ScienceProject extends Application implements EventHandler
 						{						
 							((WaterDroplet)droplet).move();
 						}
-//						((WaterDroplet)droplet).move();
 
 					}
 				}
-	
 				
 			}	
 						
@@ -108,32 +112,62 @@ public class ScienceProject extends Application implements EventHandler
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
-		waterButton = new Button("Let it rain!");
-		waterButton.setLayoutX(200);
-		waterButton.setLayoutY(700);
-		waterButton.setOnAction(this);
+		rainButton = new Button("Let it rain!");
+		rainButton.setLayoutX(50);
+		rainButton.setLayoutY(700);
+		rainButton.setOnAction(this);
 		
-		gameObjects.add(new Seed(200,400, gc));
+		daysButton = new Button("Days counter");
+		daysButton.setLayoutX(350);
+		daysButton.setLayoutY(700);
+		daysButton.setOnAction(this);
+		
+		gameObjects.add(new Seed(200,450, gc));
 		droplets.add(new Cloud(1, 1, gc));
 		droplets.add(new Cloud(405, 1, gc));
 		
-        root.getChildren().addAll(canvas, waterButton);
+        root.getChildren().addAll(canvas, rainButton, daysButton);
 						
 	}
 
 	@Override
 	public void handle(Event event) 
 	{
-	
-		if(event.getSource() == this.waterButton)
+		
+		if(event.getSource() == this.rainButton)
 		{
-
-			for (GameObject gameObject : gameObjects) 
-			{
-				((Seed)gameObject).changeGrowthStage();
-			}
-			
 			timer.start();
+					
+			isRainButtonClicked = true;	
+			
+		}
+	
+		if(event.getSource() == this.daysButton)
+		{
+			
+			if (isRainButtonClicked) 
+			{
+				
+				for (GameObject gameObject : gameObjects) 
+				{
+					((Seed)gameObject).changeGrowthStage();
+				}
+				
+				
+				this.daysButton.setOnMouseClicked(new EventHandler<MouseEvent>() 
+				{
+				
+					@Override
+					public void handle(MouseEvent mouseEvent) 
+					{
+						noOfDays++;
+
+					}			
+					
+				});
+				
+			}
+		
 		}	
 		
 	}
