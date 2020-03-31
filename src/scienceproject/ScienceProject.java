@@ -1,6 +1,8 @@
 package scienceproject;
 
 import java.util.*;
+
+import factory.InformationFactory;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -10,13 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -31,15 +27,12 @@ public class ScienceProject extends Application implements EventHandler
 	Canvas canvas;
 	GraphicsContext gc;
 	Button rainButton, daysButton;
-	Label plantName, displayDays;
+	Label plantName, displayDays, displayInfo;
 	Rectangle soil, grass;
+	InformationFactory informationFactory;
 	
 	boolean isRainButtonClicked;
 	int noOfDays;
-	
-	BackgroundImage bgImage = new BackgroundImage(new Image("/resources/garden.PNG",32,32,false,true),
-	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-	        BackgroundSize.DEFAULT);
 	
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
@@ -136,7 +129,7 @@ public class ScienceProject extends Application implements EventHandler
 		soil.setLayoutX(190);
 		soil.setLayoutY(545);
 		
-		grass = new Rectangle(550, 100);
+		grass = new Rectangle(650, 100);
 		grass.setFill(Paint.valueOf("#144e14"));
 		grass.setLayoutX(10);
 		grass.setLayoutY(550);
@@ -149,7 +142,14 @@ public class ScienceProject extends Application implements EventHandler
 		displayDays.setLayoutX(550);
 		displayDays.setLayoutY(710);
 		
-        root.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays);
+		informationFactory = new InformationFactory();
+			
+		displayInfo = new Label(informationFactory.getInformation(0).displayTextInfo());
+		displayInfo.setLayoutX(550);
+		displayInfo.setLayoutY(200);
+		
+		
+        root.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
 						
 	}
 
@@ -205,7 +205,16 @@ public class ScienceProject extends Application implements EventHandler
 						}
 						
 						plantName.setText(name);
-						displayDays.setText(Integer.toString(noOfDays) + " days");
+						
+						if(noOfDays >= 2 && noOfDays<= 6)
+						{
+							displayDays.setText(Integer.toString(noOfDays) + " days");
+						}
+						
+						else
+						{
+							displayDays.setText("");
+						}					
 
 					}			
 					
@@ -216,6 +225,5 @@ public class ScienceProject extends Application implements EventHandler
 		}	
 		
 	}
-		
 
 }
