@@ -10,7 +10,7 @@ public class SeedInfo implements InformationInterface
 	public String displayTextInfo() 
 	{
 		
-		return "Seed information";
+		return "Seed information Seed information Seed information Seed information Seed information";
 	}
 
 }

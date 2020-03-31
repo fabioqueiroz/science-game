@@ -17,6 +17,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
@@ -27,7 +31,8 @@ public class ScienceProject extends Application implements EventHandler
 	Canvas canvas;
 	GraphicsContext gc;
 	Button rainButton, daysButton;
-	Label plantName, displayDays, displayInfo;
+	Label plantName, displayDays;// displayInfo;
+	Text displayInfo;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
 	
@@ -144,9 +149,14 @@ public class ScienceProject extends Application implements EventHandler
 		
 		informationFactory = new InformationFactory();
 			
-		displayInfo = new Label(informationFactory.getInformation(0).displayTextInfo());
-		displayInfo.setLayoutX(550);
+		//displayInfo = new Label(informationFactory.getInformation(0).displayTextInfo());
+		displayInfo = new Text(informationFactory.getInformation(0).displayTextInfo());
+		displayInfo.setLayoutX(450);
 		displayInfo.setLayoutY(200);
+		//displayInfo.setMaxWidth(250);
+		//displayInfo.setWrapText(true);
+		displayInfo.wrappingWidthProperty().set(200);
+		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		
 		
         root.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
@@ -209,11 +219,13 @@ public class ScienceProject extends Application implements EventHandler
 						if(noOfDays >= 2 && noOfDays<= 6)
 						{
 							displayDays.setText(Integer.toString(noOfDays) + " days");
+							displayInfo.setText(informationFactory.getInformation(noOfDays).displayTextInfo());
 						}
 						
 						else
 						{
 							displayDays.setText("");
+							displayInfo.setText("");
 						}					
 
 					}			
