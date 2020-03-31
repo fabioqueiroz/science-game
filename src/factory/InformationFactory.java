@@ -8,18 +8,18 @@ public class InformationFactory
 	
 	public InformationInterface getInformation(int age)
 	{
-		if (age == 0) 
+		if (age >= 0) 
 		{
 			info = new SeedInfo();
 			
 		} 
 		
-		if (age == 2) 
+		if (age >= 2 && age < 4) 
 		{
 			info = new SproutInfo();
 			
 		} 
-		if (age == 4) 
+		if (age >= 4 && age < 6) 
 		{
 			info = new YoungPlantInfo();
 			

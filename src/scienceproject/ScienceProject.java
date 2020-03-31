@@ -2,7 +2,11 @@ package scienceproject;
 
 import java.util.*;
 
+import factory.AdultPlantInfo;
 import factory.InformationFactory;
+import factory.SeedInfo;
+import factory.SproutInfo;
+import factory.YoungPlantInfo;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -21,6 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
@@ -106,7 +111,7 @@ public class ScienceProject extends Application implements EventHandler
 		scene = new Scene(root,1200,800);
 		scene.getStylesheets().add(stylesheet);
 	
-		stage.setTitle("Growing plants");
+		stage.setTitle("Plants growth stages");
 		stage.setScene(scene);
 		stage.show();
 		
@@ -157,9 +162,11 @@ public class ScienceProject extends Application implements EventHandler
 		//displayInfo.setWrapText(true);
 		displayInfo.wrappingWidthProperty().set(200);
 		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
 		
 		
-        root.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
+        root.getChildren()
+        	.addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
 						
 	}
 
@@ -189,41 +196,22 @@ public class ScienceProject extends Application implements EventHandler
 				
 				this.daysButton.setOnMouseClicked(new EventHandler<MouseEvent>() 
 				{
-					String name = "";
 				
 					@Override
 					public void handle(MouseEvent mouseEvent) 
 					{
 						noOfDays++;
-															
-						switch (noOfDays) 
+																					
+						if(noOfDays >= 0 && noOfDays<= 6)
 						{
-						case 2:
-							name = "Sprout";
-							break;
-							
-						case 4:
-							name = "Young Plant";
-							break;
-							
-						case 6:
-							name = "Adult Plant";
-							break;
-
-						default:
-							break;
-						}
-						
-						plantName.setText(name);
-						
-						if(noOfDays >= 2 && noOfDays<= 6)
-						{
+							plantName.setText(informationFactory.getInformation(noOfDays).displayName());
 							displayDays.setText(Integer.toString(noOfDays) + " days");
 							displayInfo.setText(informationFactory.getInformation(noOfDays).displayTextInfo());
 						}
 						
 						else
 						{
+							plantName.setText("");
 							displayDays.setText("");
 							displayInfo.setText("");
 						}					

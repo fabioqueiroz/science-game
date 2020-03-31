@@ -54,17 +54,6 @@ public class Seed extends GameObject implements PlantInterface
 		
 	}
 	
-	public void grow() 
-	{
-		age += 1;
-		if(age == 100)
-			plantInterface = new Sprout(x,y,gc);
-		if(age == 200)
-			plantInterface = new Sprout(x,y,gc);
-		
-		plantInterface.update();	
-	}
-	
 	public void changeGrowthStage() 
 	{
 		age += 1;
