@@ -34,7 +34,7 @@ public class WaterDroplet extends Cloud
 			dy = 1;
 		}
 		
-		if (y == 580) 
+		if (y == 620) 
 		{
 			image = changeToBlankImage();
 		}

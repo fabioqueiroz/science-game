@@ -1,6 +1,5 @@
 package scienceproject;
 
-import java.time.Duration;
 import java.util.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -10,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -19,6 +19,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 @SuppressWarnings("rawtypes")
@@ -28,10 +30,13 @@ public class ScienceProject extends Application implements EventHandler
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
-	Button rainButton;
-	Button daysButton;
+	Button rainButton, daysButton;
+	Label plantName, displayDays;
+	Rectangle soil, grass;
+	
 	boolean isRainButtonClicked;
 	int noOfDays;
+	
 	BackgroundImage bgImage = new BackgroundImage(new Image("/resources/garden.PNG",32,32,false,true),
 	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	        BackgroundSize.DEFAULT);
@@ -126,7 +131,25 @@ public class ScienceProject extends Application implements EventHandler
 		droplets.add(new Cloud(1, 1, gc));
 		droplets.add(new Cloud(405, 1, gc));
 		
-        root.getChildren().addAll(canvas, rainButton, daysButton);
+		soil = new Rectangle(150, 5);
+		soil.setFill(Paint.valueOf("#3f2828"));
+		soil.setLayoutX(190);
+		soil.setLayoutY(545);
+		
+		grass = new Rectangle(550, 100);
+		grass.setFill(Paint.valueOf("#144e14"));
+		grass.setLayoutX(10);
+		grass.setLayoutY(550);
+		
+		plantName = new Label("Seed");
+		plantName.setLayoutX(390);
+		plantName.setLayoutY(510);
+		
+		displayDays = new Label("");
+		displayDays.setLayoutX(550);
+		displayDays.setLayoutY(710);
+		
+        root.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays);
 						
 	}
 
@@ -156,11 +179,33 @@ public class ScienceProject extends Application implements EventHandler
 				
 				this.daysButton.setOnMouseClicked(new EventHandler<MouseEvent>() 
 				{
+					String name = "";
 				
 					@Override
 					public void handle(MouseEvent mouseEvent) 
 					{
 						noOfDays++;
+															
+						switch (noOfDays) 
+						{
+						case 2:
+							name = "Sprout";
+							break;
+							
+						case 4:
+							name = "Young Plant";
+							break;
+							
+						case 6:
+							name = "Adult Plant";
+							break;
+
+						default:
+							break;
+						}
+						
+						plantName.setText(name);
+						displayDays.setText(Integer.toString(noOfDays) + " days");
 
 					}			
 					

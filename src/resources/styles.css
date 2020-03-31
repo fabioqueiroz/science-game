@@ -12,3 +12,9 @@
 .button:hover{
     -fx-background-color: blue;
 }
+
+.label {
+	-fx-font-size: 25px;
+	-fx-text-fill: white;
+	-fx-background-color: rgb(10, 8, 49);
+}
