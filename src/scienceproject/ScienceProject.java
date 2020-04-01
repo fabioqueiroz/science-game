@@ -6,11 +6,7 @@ import builder.ContentCreator;
 import builder.Questionnaire;
 import builder.QuizBuilder;
 import builder.QuizOneBuilder;
-import factory.AdultPlantInfo;
 import factory.InformationFactory;
-import factory.SeedInfo;
-import factory.SproutInfo;
-import factory.YoungPlantInfo;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.Event;
@@ -44,7 +40,7 @@ public class ScienceProject extends Application implements EventHandler
 	Canvas canvas;
 	GraphicsContext gc;
 	Button rainButton, daysButton, resetButton;
-	Label plantName, displayDays;// displayInfo;
+	Label plantName, displayDays;
 	Text displayInfo, source, target, displayQuestions;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
@@ -167,12 +163,9 @@ public class ScienceProject extends Application implements EventHandler
 		
 		informationFactory = new InformationFactory();
 			
-		//displayInfo = new Label(informationFactory.getInformation(0).displayTextInfo());
 		displayInfo = new Text(informationFactory.getInformation(0).displayTextInfo());
 		displayInfo.setLayoutX(450);
 		displayInfo.setLayoutY(200);
-		//displayInfo.setMaxWidth(250);
-		//displayInfo.setWrapText(true);
 		displayInfo.wrappingWidthProperty().set(200);
 		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
@@ -189,7 +182,7 @@ public class ScienceProject extends Application implements EventHandler
       	displayQuestions = new Text(questionnaire.displayQuestions());
       	displayQuestions.setLayoutX(1000);
       	displayQuestions.setLayoutY(100);
-      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 25));
       	displayQuestions.setTextAlignment(TextAlignment.JUSTIFY);
 		
         root.getChildren()
