@@ -16,7 +16,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -35,9 +39,9 @@ public class ScienceProject extends Application implements EventHandler
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
-	Button rainButton, daysButton;
+	Button rainButton, daysButton, resetButton;
 	Label plantName, displayDays;// displayInfo;
-	Text displayInfo;
+	Text displayInfo, source, target;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
 	
@@ -108,14 +112,14 @@ public class ScienceProject extends Application implements EventHandler
 		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
 		
 		root = new Pane();
-		scene = new Scene(root,1200,800);
+		scene = new Scene(root,1400,800);
 		scene.getStylesheets().add(stylesheet);
 	
 		stage.setTitle("Plants growth stages");
 		stage.setScene(scene);
 		stage.show();
 		
-		canvas = new Canvas(1200,800);
+		canvas = new Canvas(1400,800);
 		gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
@@ -129,6 +133,11 @@ public class ScienceProject extends Application implements EventHandler
 		daysButton.setLayoutX(350);
 		daysButton.setLayoutY(700);
 		daysButton.setOnAction(this);
+		
+		resetButton = new Button("Start again!");
+		resetButton.setLayoutX(700);
+		resetButton.setLayoutY(700);
+		resetButton.setOnAction(this);
 		
 		gameObjects.add(new Seed(200,450, gc));
 		droplets.add(new Cloud(1, 1, gc));
@@ -164,9 +173,109 @@ public class ScienceProject extends Application implements EventHandler
 		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
 		
+		source = new Text(700, 300, "DRAG ME");
+      	target = new Text(1000, 300, "______________");
 		
         root.getChildren()
-        	.addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
+        	.addAll(canvas, rainButton, daysButton, resetButton, plantName, soil, grass, displayDays, displayInfo, source, target);
+        
+        // Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
+        source.setOnDragDetected(new EventHandler<MouseEvent>() 
+		{
+		    public void handle(MouseEvent event) 
+		    {
+		        /* drag was detected, start a drag-and-drop gesture*/
+		        /* allow any transfer mode */
+		        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+		        
+		        /* Put a string on a dragboard */
+		        ClipboardContent content = new ClipboardContent();
+		        content.putString(source.getText());
+		        db.setContent(content);
+		        
+		        event.consume();
+		    }
+		});
+
+        source.setOnDragDone(new EventHandler<DragEvent>() 
+        {
+            public void handle(DragEvent event) 
+            {
+                /* the drag and drop gesture ended */
+                /* if the data was successfully moved, clear it */
+                if (event.getTransferMode() == TransferMode.MOVE) 
+                {
+                    source.setText("__________");
+                }
+                event.consume();
+            }
+        });
+
+        target.setOnDragOver(new EventHandler<DragEvent>() 
+		{
+		    public void handle(DragEvent event) 
+		    {
+		        /* data is dragged over the target */
+		        /* accept it only if it is not dragged from the same node 
+		         * and if it has a string data */
+		        if (event.getGestureSource() != target &&
+		                event.getDragboard().hasString()) 
+		        {
+		            /* allow for both copying and moving, whatever user chooses */
+		            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+		        }
+		        
+		        event.consume();
+		    }
+		});
+
+		target.setOnDragEntered(new EventHandler<DragEvent>() 
+		{
+		    public void handle(DragEvent event) 
+		    {
+		    /* the drag-and-drop gesture entered the target */
+		    /* show to the user that it is an actual gesture target */
+		         if (event.getGestureSource() != target &&
+		                 event.getDragboard().hasString()) 
+		         {
+		             target.setFill(Color.GREEN);
+		         }
+		                
+		         event.consume();
+		    }
+		});
+
+		target.setOnDragExited(new EventHandler<DragEvent>() 
+		{
+		    public void handle(DragEvent event) 
+		    {
+		        /* mouse moved away, remove the graphical cues */
+		        target.setFill(Color.BLACK);
+
+		        event.consume();
+		    }
+		});
+
+		target.setOnDragDropped(new EventHandler<DragEvent>() 
+		{
+		    public void handle(DragEvent event) 
+		    {
+		        /* data dropped */
+		        /* if there is a string data on dragboard, read it and use it */
+		        Dragboard db = event.getDragboard();
+		        boolean success = false;
+		        if (db.hasString()) 
+		        {
+		           target.setText(db.getString());
+		           success = true;
+		        }
+		        /* let the source know whether the string was successfully 
+		         * transferred and used */
+		        event.setDropCompleted(success);
+		        
+		        event.consume();
+		     }
+		});
 						
 	}
 
@@ -223,6 +332,13 @@ public class ScienceProject extends Application implements EventHandler
 			}
 		
 		}	
+		
+		if(event.getSource() == this.resetButton)
+		{
+			source.setText("DRAG ME AGAIN");
+			target.setText("______________");
+			
+		}
 		
 	}
 
