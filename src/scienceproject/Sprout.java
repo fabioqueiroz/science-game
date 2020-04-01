@@ -1,6 +1,6 @@
 package scienceproject;
 
-import Interfaces.PlantInterface;
+import interfaces.PlantInterface;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;

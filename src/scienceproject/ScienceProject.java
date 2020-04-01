@@ -2,6 +2,10 @@ package scienceproject;
 
 import java.util.*;
 
+import builder.ContentCreator;
+import builder.Questionnaire;
+import builder.QuizBuilder;
+import builder.QuizOneBuilder;
 import factory.AdultPlantInfo;
 import factory.InformationFactory;
 import factory.SeedInfo;
@@ -41,7 +45,7 @@ public class ScienceProject extends Application implements EventHandler
 	GraphicsContext gc;
 	Button rainButton, daysButton, resetButton;
 	Label plantName, displayDays;// displayInfo;
-	Text displayInfo, source, target;
+	Text displayInfo, source, target, displayQuestions;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
 	
@@ -175,9 +179,22 @@ public class ScienceProject extends Application implements EventHandler
 		
 		source = new Text(700, 300, "DRAG ME");
       	target = new Text(1000, 300, "______________");
+      	
+      	ContentCreator content = new ContentCreator();
+      	QuizBuilder quizBuilder = new QuizOneBuilder();
+      	content.setQuizBuilder(quizBuilder);
+      	content.generateNewQuiz();
+      	Questionnaire questionnaire = content.getQuestionnaire();
+
+      	displayQuestions = new Text(questionnaire.displayQuestions());
+      	displayQuestions.setLayoutX(1000);
+      	displayQuestions.setLayoutY(100);
+      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
+      	displayQuestions.setTextAlignment(TextAlignment.JUSTIFY);
 		
         root.getChildren()
-        	.addAll(canvas, rainButton, daysButton, resetButton, plantName, soil, grass, displayDays, displayInfo, source, target);
+        	.addAll(canvas, rainButton, daysButton, resetButton, plantName, 
+        			soil, grass, displayDays, displayInfo, source, target, displayQuestions);
         
         // Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
         source.setOnDragDetected(new EventHandler<MouseEvent>() 
@@ -311,7 +328,7 @@ public class ScienceProject extends Application implements EventHandler
 					{
 						noOfDays++;
 																					
-						if(noOfDays >= 0 && noOfDays<= 6)
+						if(noOfDays >= 0 && noOfDays <= 6)
 						{
 							plantName.setText(informationFactory.getInformation(noOfDays).displayName());
 							displayDays.setText(Integer.toString(noOfDays) + " days");

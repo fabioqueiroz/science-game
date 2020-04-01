@@ -1,6 +1,6 @@
 package factory;
 
-import Interfaces.InformationInterface;
+import interfaces.InformationInterface;
 
 public class YoungPlantInfo implements InformationInterface
 {
