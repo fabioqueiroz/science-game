@@ -8,6 +8,7 @@ import builder.QuizBuilder;
 import builder.QuizOneBuilder;
 import builder.QuizThreeBuilder;
 import builder.QuizTwoBuilder;
+import crosscutting.DragAndDropEventGenerator;
 import factory.InformationFactory;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -252,104 +253,15 @@ public class ScienceProject extends Application implements EventHandler
         			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
         			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu);
 
+        // Source 1, Target 1
+     	DragAndDropEventGenerator.DragAndDropCreator(sourceOne, targetOne);
+     	// Source 2, Target 2
+    	DragAndDropEventGenerator.DragAndDropCreator(sourceTwo, targetTwo);
+    	// Source 3, Target 3
+    	DragAndDropEventGenerator.DragAndDropCreator(sourceThree, targetThree);
+    	// Source 3, Target 3
+    	DragAndDropEventGenerator.DragAndDropCreator(sourceFour, targetFour);
         
-        // Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
-        sourceOne.setOnDragDetected(new EventHandler<MouseEvent>() 
-		{
-		    public void handle(MouseEvent event) 
-		    {
-		        /* drag was detected, start a drag-and-drop gesture*/
-		        /* allow any transfer mode */
-		        Dragboard db = sourceOne.startDragAndDrop(TransferMode.ANY);
-		        
-		        /* Put a string on a dragboard */
-		        ClipboardContent content = new ClipboardContent();
-		        content.putString(sourceOne.getText());
-		        db.setContent(content);
-		        
-		        event.consume();
-		    }
-		});
-
-        sourceOne.setOnDragDone(new EventHandler<DragEvent>() 
-        {
-            public void handle(DragEvent event) 
-            {
-                /* the drag and drop gesture ended */
-                /* if the data was successfully moved, clear it */
-                if (event.getTransferMode() == TransferMode.MOVE) 
-                {
-                    sourceOne.setText("__________");
-                }
-                event.consume();
-            }
-        });
-
-        targetOne.setOnDragOver(new EventHandler<DragEvent>() 
-		{
-		    public void handle(DragEvent event) 
-		    {
-		        /* data is dragged over the target */
-		        /* accept it only if it is not dragged from the same node 
-		         * and if it has a string data */
-		        if (event.getGestureSource() != targetOne &&
-		                event.getDragboard().hasString()) 
-		        {
-		            /* allow for both copying and moving, whatever user chooses */
-		            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-		        }
-		        
-		        event.consume();
-		    }
-		});
-
-		targetOne.setOnDragEntered(new EventHandler<DragEvent>() 
-		{
-		    public void handle(DragEvent event) 
-		    {
-		    /* the drag-and-drop gesture entered the target */
-		    /* show to the user that it is an actual gesture target */
-		         if (event.getGestureSource() != targetOne &&
-		                 event.getDragboard().hasString()) 
-		         {
-		             targetOne.setFill(Color.GREEN);
-		         }
-		                
-		         event.consume();
-		    }
-		});
-
-		targetOne.setOnDragExited(new EventHandler<DragEvent>() 
-		{
-		    public void handle(DragEvent event) 
-		    {
-		        /* mouse moved away, remove the graphical cues */
-		        targetOne.setFill(Color.BLACK);
-
-		        event.consume();
-		    }
-		});
-
-		targetOne.setOnDragDropped(new EventHandler<DragEvent>() 
-		{
-		    public void handle(DragEvent event) 
-		    {
-		        /* data dropped */
-		        /* if there is a string data on dragboard, read it and use it */
-		        Dragboard db = event.getDragboard();
-		        boolean success = false;
-		        if (db.hasString()) 
-		        {
-		           targetOne.setText(db.getString());
-		           success = true;
-		        }
-		        /* let the source know whether the string was successfully 
-		         * transferred and used */
-		        event.setDropCompleted(success);
-		        
-		        event.consume();
-		     }
-		});
 						
 	}
 
@@ -409,8 +321,15 @@ public class ScienceProject extends Application implements EventHandler
 		
 		if(event.getSource() == this.resetButton)
 		{
-			sourceOne.setText("DRAG ME AGAIN");
+			sourceOne.setText("DRAG ME AGAIN 1");
 			targetOne.setText("______________");
+			sourceTwo.setText("DRAG ME AGAIN 2");
+			targetTwo.setText("______________");
+			sourceThree.setText("DRAG ME AGAIN 3");
+			targetThree.setText("______________");
+			sourceFour.setText("DRAG ME AGAIN 4");
+			targetFour.setText("______________");
+			
 			menu.setValue("Choose topic");
 			
 			displayQuestions.setText("Select a topic and answer the questions");
