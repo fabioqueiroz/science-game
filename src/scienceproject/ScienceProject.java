@@ -8,6 +8,7 @@ import builder.QuizBuilder;
 import builder.QuizOneBuilder;
 import builder.QuizThreeBuilder;
 import builder.QuizTwoBuilder;
+import crosscutting.ComponentGenerator;
 import crosscutting.DragAndDropEventGenerator;
 import factory.InformationFactory;
 import javafx.animation.AnimationTimer;
@@ -164,7 +165,7 @@ public class ScienceProject extends Application implements EventHandler
 		scene = new Scene(root,1400,800);
 		scene.getStylesheets().add(stylesheet);
 	
-		stage.setTitle("Plants growth stages");
+		stage.setTitle("Plant growth stages");
 		stage.setScene(scene);
 		stage.show();
 		
@@ -173,51 +174,33 @@ public class ScienceProject extends Application implements EventHandler
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
-		rainButton = new Button("Let it rain!");
-		rainButton.setLayoutX(50);
-		rainButton.setLayoutY(700);
+		// Create UI buttons and layout
+		rainButton = ComponentGenerator.createButton("Let it rain!", 50, 700);
 		rainButton.setOnAction(this);
 		
-		daysButton = new Button("Days counter");
-		daysButton.setLayoutX(350);
-		daysButton.setLayoutY(700);
+		daysButton = ComponentGenerator.createButton("Days counter", 350, 700);
 		daysButton.setOnAction(this);
 		
-		resetButton = new Button("Start again!");
-		resetButton.setLayoutX(700);
-		resetButton.setLayoutY(700);
+		resetButton = ComponentGenerator.createButton("Start again!", 700, 700);
 		resetButton.setOnAction(this);
 		
+		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
+		grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
+		
+		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
+		displayDays = ComponentGenerator.createLabel("", 550, 710);
+		
+		// Add new objects to the array lists
 		gameObjects.add(new Seed(200,450, gc));
 		droplets.add(new Cloud(1, 1, gc));
-		droplets.add(new Cloud(405, 1, gc));
+		droplets.add(new Cloud(405, 1, gc)); 
 		
-		soil = new Rectangle(150, 5);
-		soil.setFill(Paint.valueOf("#3f2828"));
-		soil.setLayoutX(190);
-		soil.setLayoutY(545);
-		
-		grass = new Rectangle(650, 100);
-		grass.setFill(Paint.valueOf("#144e14"));
-		grass.setLayoutX(10);
-		grass.setLayoutY(550);
-		
-		plantName = new Label("Seed");
-		plantName.setLayoutX(390);
-		plantName.setLayoutY(510);
-		
-		displayDays = new Label("");
-		displayDays.setLayoutX(550);
-		displayDays.setLayoutY(710);
-		
+		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
 			
 		displayInfo = new Text(informationFactory.getInformation(0).displayTextInfo());
-		displayInfo.setLayoutX(450);
-		displayInfo.setLayoutY(200);
-		displayInfo.wrappingWidthProperty().set(200);
-		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
-		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
+		ComponentGenerator.createTextBlock(displayInfo, 450, 200, 200, 20);
+		
 		
 		sourceOne = new Text(700, 200, "DRAG ME 1");
 		sourceTwo = new Text(700, 250, "DRAG ME 2");
@@ -227,27 +210,26 @@ public class ScienceProject extends Application implements EventHandler
       	targetOne = new Text(1000, 150, "______________");
       	targetTwo = new Text(1000, 250, "______________");
       	targetThree = new Text(1000, 350, "______________");
-      	targetFour = new Text(1000, 450, "______________");
+      	targetFour = new Text(1000, 750, "______________");
       	
       	
       	menu = new ComboBox<String>(menuOptions);
       	menu.setLayoutX(700);
       	menu.setLayoutY(10);
-      	menu.setValue("Choose topic");
+      	menu.setValue("Choose quiz");
       	
       	menu.getSelectionModel().selectedItemProperty().addListener(menuListener);
       	
       	// Quiz generator
       	content = new ContentCreator();
+      	quizBuilder = null;
       	
-      	// Display questions area
+      	// Display the questions area
       	displayQuestions = new Text("Select a topic and answer the questions");
-      	displayQuestions.setLayoutX(900);
-      	displayQuestions.setLayoutY(100);
-      	displayQuestions.wrappingWidthProperty().set(450);
-      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
-      	displayQuestions.setTextAlignment(TextAlignment.JUSTIFY);
+      	ComponentGenerator.createTextBlock(displayQuestions, 900, 100, 450, 20);
+
 		
+      	// Build the solution
         root.getChildren()
         	.addAll(canvas, rainButton, daysButton, resetButton, plantName, 
         			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
@@ -319,7 +301,7 @@ public class ScienceProject extends Application implements EventHandler
 		
 		}	
 		
-		if(event.getSource() == this.resetButton)
+		if(event.getSource() == this.resetButton && quizBuilder != null)
 		{
 			sourceOne.setText("DRAG ME AGAIN 1");
 			targetOne.setText("______________");
