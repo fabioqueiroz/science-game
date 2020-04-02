@@ -6,15 +6,22 @@ import builder.ContentCreator;
 import builder.Questionnaire;
 import builder.QuizBuilder;
 import builder.QuizOneBuilder;
+import builder.QuizThreeBuilder;
+import builder.QuizTwoBuilder;
 import factory.InformationFactory;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -44,12 +51,51 @@ public class ScienceProject extends Application implements EventHandler
 	Text displayInfo, source, target, displayQuestions;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
+	ComboBox<String> menu;
+	ContentCreator content;
+	QuizBuilder quizBuilder;
+	Questionnaire questionnaire;
 	
 	boolean isRainButtonClicked;
 	int noOfDays;
 	
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
+	
+	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
+	ChangeListener menuListener = new ChangeListener() 
+	{
+		
+		@Override
+		public void changed(ObservableValue observable, Object oldValue, Object newValue) 
+		{
+						
+			if (observable.getValue().equals("Topic 1")) 
+			{
+				quizBuilder = new QuizOneBuilder();
+
+			}
+			
+			if (observable.getValue().equals("Topic 2")) 
+			{
+				quizBuilder = new QuizTwoBuilder();
+
+			}
+			
+			if (observable.getValue().equals("Topic 3")) 
+			{
+				quizBuilder = new QuizThreeBuilder();
+
+			}		
+			
+			content.setQuizBuilder(quizBuilder);
+			content.generateNewQuiz();
+			questionnaire = content.getQuestionnaire();
+			displayQuestions.setText(questionnaire.displayQuestions());
+		}
+		
+	};
+			
 	
 	Random rnd = new Random(System.currentTimeMillis());
 	int count = 0;
@@ -173,21 +219,29 @@ public class ScienceProject extends Application implements EventHandler
 		source = new Text(700, 300, "DRAG ME");
       	target = new Text(1000, 300, "______________");
       	
-      	ContentCreator content = new ContentCreator();
-      	QuizBuilder quizBuilder = new QuizOneBuilder();
-      	content.setQuizBuilder(quizBuilder);
-      	content.generateNewQuiz();
-      	Questionnaire questionnaire = content.getQuestionnaire();
-
-      	displayQuestions = new Text(questionnaire.displayQuestions());
-      	displayQuestions.setLayoutX(1000);
+      	
+      	menu = new ComboBox<String>(menuOptions);
+      	menu.setLayoutX(700);
+      	menu.setLayoutY(10);
+      	menu.setValue("Choose topic");
+      	
+      	menu.getSelectionModel().selectedItemProperty().addListener(menuListener);
+      	
+      	// Quiz generator
+      	content = new ContentCreator();
+      	
+      	// Display questions area
+      	displayQuestions = new Text("Select a topic and answer the questions");
+      	displayQuestions.setLayoutX(900);
       	displayQuestions.setLayoutY(100);
+      	displayQuestions.wrappingWidthProperty().set(450);
       	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 25));
       	displayQuestions.setTextAlignment(TextAlignment.JUSTIFY);
 		
         root.getChildren()
         	.addAll(canvas, rainButton, daysButton, resetButton, plantName, 
-        			soil, grass, displayDays, displayInfo, source, target, displayQuestions);
+        			soil, grass, displayDays, displayInfo, source, target, displayQuestions, menu);
+
         
         // Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
         source.setOnDragDetected(new EventHandler<MouseEvent>() 
@@ -347,6 +401,9 @@ public class ScienceProject extends Application implements EventHandler
 		{
 			source.setText("DRAG ME AGAIN");
 			target.setText("______________");
+			menu.setValue("Choose topic");
+			
+			displayQuestions.setText("Select a topic and answer the questions");
 			
 		}
 		

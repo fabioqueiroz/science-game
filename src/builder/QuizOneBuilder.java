@@ -27,7 +27,7 @@ public class QuizOneBuilder extends QuizBuilder
 	@Override
 	void createQuestionFour() 
 	 {
-		questionnaire.setQuestionFour("2) quiz 1,  question 4");
+		questionnaire.setQuestionFour("4) quiz 1,  question 4");
 		
 	}
 	
