@@ -48,7 +48,8 @@ public class ScienceProject extends Application implements EventHandler
 	GraphicsContext gc;
 	Button rainButton, daysButton, resetButton;
 	Label plantName, displayDays;
-	Text displayInfo, source, target, displayQuestions;
+	Text displayInfo, displayQuestions;
+	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
 	Rectangle soil, grass;
 	InformationFactory informationFactory;
 	ComboBox<String> menu;
@@ -217,8 +218,15 @@ public class ScienceProject extends Application implements EventHandler
 		displayInfo.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
 		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
 		
-		source = new Text(700, 300, "DRAG ME");
-      	target = new Text(1000, 600, "______________");
+		sourceOne = new Text(700, 200, "DRAG ME 1");
+		sourceTwo = new Text(700, 250, "DRAG ME 2");
+		sourceThree = new Text(700, 300, "DRAG ME 3");
+		sourceFour = new Text(700, 350, "DRAG ME 4");
+		
+      	targetOne = new Text(1000, 150, "______________");
+      	targetTwo = new Text(1000, 250, "______________");
+      	targetThree = new Text(1000, 350, "______________");
+      	targetFour = new Text(1000, 450, "______________");
       	
       	
       	menu = new ComboBox<String>(menuOptions);
@@ -236,33 +244,34 @@ public class ScienceProject extends Application implements EventHandler
       	displayQuestions.setLayoutX(900);
       	displayQuestions.setLayoutY(100);
       	displayQuestions.wrappingWidthProperty().set(450);
-      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 25));
+      	displayQuestions.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, 20));
       	displayQuestions.setTextAlignment(TextAlignment.JUSTIFY);
 		
         root.getChildren()
         	.addAll(canvas, rainButton, daysButton, resetButton, plantName, 
-        			soil, grass, displayDays, displayInfo, source, target, displayQuestions, menu);
+        			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
+        			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu);
 
         
         // Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
-        source.setOnDragDetected(new EventHandler<MouseEvent>() 
+        sourceOne.setOnDragDetected(new EventHandler<MouseEvent>() 
 		{
 		    public void handle(MouseEvent event) 
 		    {
 		        /* drag was detected, start a drag-and-drop gesture*/
 		        /* allow any transfer mode */
-		        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+		        Dragboard db = sourceOne.startDragAndDrop(TransferMode.ANY);
 		        
 		        /* Put a string on a dragboard */
 		        ClipboardContent content = new ClipboardContent();
-		        content.putString(source.getText());
+		        content.putString(sourceOne.getText());
 		        db.setContent(content);
 		        
 		        event.consume();
 		    }
 		});
 
-        source.setOnDragDone(new EventHandler<DragEvent>() 
+        sourceOne.setOnDragDone(new EventHandler<DragEvent>() 
         {
             public void handle(DragEvent event) 
             {
@@ -270,20 +279,20 @@ public class ScienceProject extends Application implements EventHandler
                 /* if the data was successfully moved, clear it */
                 if (event.getTransferMode() == TransferMode.MOVE) 
                 {
-                    source.setText("__________");
+                    sourceOne.setText("__________");
                 }
                 event.consume();
             }
         });
 
-        target.setOnDragOver(new EventHandler<DragEvent>() 
+        targetOne.setOnDragOver(new EventHandler<DragEvent>() 
 		{
 		    public void handle(DragEvent event) 
 		    {
 		        /* data is dragged over the target */
 		        /* accept it only if it is not dragged from the same node 
 		         * and if it has a string data */
-		        if (event.getGestureSource() != target &&
+		        if (event.getGestureSource() != targetOne &&
 		                event.getDragboard().hasString()) 
 		        {
 		            /* allow for both copying and moving, whatever user chooses */
@@ -294,34 +303,34 @@ public class ScienceProject extends Application implements EventHandler
 		    }
 		});
 
-		target.setOnDragEntered(new EventHandler<DragEvent>() 
+		targetOne.setOnDragEntered(new EventHandler<DragEvent>() 
 		{
 		    public void handle(DragEvent event) 
 		    {
 		    /* the drag-and-drop gesture entered the target */
 		    /* show to the user that it is an actual gesture target */
-		         if (event.getGestureSource() != target &&
+		         if (event.getGestureSource() != targetOne &&
 		                 event.getDragboard().hasString()) 
 		         {
-		             target.setFill(Color.GREEN);
+		             targetOne.setFill(Color.GREEN);
 		         }
 		                
 		         event.consume();
 		    }
 		});
 
-		target.setOnDragExited(new EventHandler<DragEvent>() 
+		targetOne.setOnDragExited(new EventHandler<DragEvent>() 
 		{
 		    public void handle(DragEvent event) 
 		    {
 		        /* mouse moved away, remove the graphical cues */
-		        target.setFill(Color.BLACK);
+		        targetOne.setFill(Color.BLACK);
 
 		        event.consume();
 		    }
 		});
 
-		target.setOnDragDropped(new EventHandler<DragEvent>() 
+		targetOne.setOnDragDropped(new EventHandler<DragEvent>() 
 		{
 		    public void handle(DragEvent event) 
 		    {
@@ -331,7 +340,7 @@ public class ScienceProject extends Application implements EventHandler
 		        boolean success = false;
 		        if (db.hasString()) 
 		        {
-		           target.setText(db.getString());
+		           targetOne.setText(db.getString());
 		           success = true;
 		        }
 		        /* let the source know whether the string was successfully 
@@ -400,8 +409,8 @@ public class ScienceProject extends Application implements EventHandler
 		
 		if(event.getSource() == this.resetButton)
 		{
-			source.setText("DRAG ME AGAIN");
-			target.setText("______________");
+			sourceOne.setText("DRAG ME AGAIN");
+			targetOne.setText("______________");
 			menu.setValue("Choose topic");
 			
 			displayQuestions.setText("Select a topic and answer the questions");
