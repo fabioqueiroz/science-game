@@ -65,6 +65,8 @@ public class ScienceProject extends Application implements EventHandler
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
 	
+	//HashMap<String, ArrayList<String>> answers = new HashMap<String, ArrayList<String>>();
+	
 	// Define the questionnaire topics and listen to changes
 	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
 	ChangeListener menuListener = new ChangeListener() 
@@ -96,6 +98,15 @@ public class ScienceProject extends Application implements EventHandler
 			content.generateNewQuiz();
 			questionnaire = content.getQuestionnaire();
 			displayQuestions.setText(questionnaire.displayQuestions());
+			
+			
+			for (int i = 0; i < questionnaire.getAnswers().size(); i++) 
+			{
+				sourceOne.setText(questionnaire.getAnswers().get(0));
+				sourceTwo.setText(questionnaire.getAnswers().get(1));
+				sourceThree.setText(questionnaire.getAnswers().get(2));
+				sourceFour.setText(questionnaire.getAnswers().get(3));
+			}
 			
 			targetOne.setText("1) ______________");
 	      	targetTwo.setText("2) ______________");
@@ -315,16 +326,12 @@ public class ScienceProject extends Application implements EventHandler
 		
 		if(event.getSource() == this.resetButton && quizBuilder != null)
 		{
-			sourceOne.setText("DRAG ME AGAIN 1");
-			sourceTwo.setText("DRAG ME AGAIN 2");
-			sourceThree.setText("DRAG ME AGAIN 3");
-			sourceFour.setText("DRAG ME AGAIN 4");
 			
-//			targetOne.setText("");
-//	      	targetTwo.setText("");
-//	      	targetThree.setText("");
-//	      	targetFour.setText("");
-			
+			sourceOne.setText("");
+			sourceTwo.setText("");
+			sourceThree.setText("");
+			sourceFour.setText("");
+
 			menu.setValue("Choose quiz");
 			
 			displayQuestions.setText("Select a topic and answer the questions");

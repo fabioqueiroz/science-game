@@ -1,10 +1,11 @@
 package builder;
 
-import javafx.scene.text.Text;
+import java.util.ArrayList;
 
 public class Questionnaire 
 {
-	String questionOne, questionTwo, questionThree, questionFour;
+	private String questionOne, questionTwo, questionThree, questionFour;
+	private String answerOne, answerTwo, answerThree, answerFour;
 	
 	public String getQuestionOne() 
 	{
@@ -46,10 +47,62 @@ public class Questionnaire
 		this.questionFour = questionFour;
 	}
 	
+	public String getAnswerOne() 
+	{
+		return answerOne;
+	}
+	
+	public String getAnswerTwo() 
+	{
+		return answerTwo;
+	}
+	
+	public String getAnswerThree() 
+	{
+		return answerThree;
+	}
+	
+	public String getAnswerFour() 
+	{
+		return answerFour;
+	}
+	
+	public void setAnswerOne(String answerOne) 
+	{
+		this.answerOne = answerOne;
+	}
+	
+	public void setAnswerTwo(String answerTwo) 
+	{
+		this.answerTwo = answerTwo;
+	}
+	
+	public void setAnswerThree(String answerThree)
+	{
+		this.answerThree = answerThree;
+	}
+	
+	public void setAnswerFour(String answerFour) 
+	{
+		this.answerFour = answerFour;
+	}
 
 	public String displayQuestions()
 	{
 		return getQuestionOne() + "\n\n\n" + getQuestionTwo() + "\n\n\n" 
 				+ getQuestionThree() + "\n\n\n" + getQuestionFour() + "\n\n\n" + "Answers: " + "\n\n";
 	}
+	
+	public ArrayList<String> getAnswers()
+	{
+		ArrayList<String> answers = new ArrayList<String>();
+		
+		answers.add(getAnswerOne());
+		answers.add(getAnswerTwo());
+		answers.add(getAnswerThree());
+		answers.add(getAnswerFour());
+		
+		return answers;
+	}
+	
 }

@@ -9,6 +9,11 @@ public abstract class QuizBuilder
 	abstract void createQuestionThree();
 	abstract void createQuestionFour();
 	
+	abstract void createAnswerOne();
+	abstract void createAnswerTwo();
+	abstract void createAnswerThree();
+	abstract void createAnswerFour();
+	
 	public Questionnaire getQuestionnaire() 
 	{
 		return questionnaire;

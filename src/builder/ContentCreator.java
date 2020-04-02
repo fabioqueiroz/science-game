@@ -1,7 +1,5 @@
 package builder;
 
-import javafx.scene.text.Text;
-
 public class ContentCreator 
 {
 	QuizBuilder quizBuilder;
@@ -19,9 +17,15 @@ public class ContentCreator
 	public void generateNewQuiz()
 	{
 		quizBuilder.createNewQuestionnaire();
+		
 		quizBuilder.createQuestionOne();
 		quizBuilder.createQuestionTwo();
 		quizBuilder.createQuestionThree();
 		quizBuilder.createQuestionFour();
+		
+		quizBuilder.createAnswerOne();
+		quizBuilder.createAnswerTwo();
+		quizBuilder.createAnswerThree();
+		quizBuilder.createAnswerFour();
 	}
 }
