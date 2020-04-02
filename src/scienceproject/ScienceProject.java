@@ -62,6 +62,7 @@ public class ScienceProject extends Application implements EventHandler
 	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
 	
+	// Define the questionnaire topics and listen to changes
 	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
 	ChangeListener menuListener = new ChangeListener() 
 	{
@@ -217,7 +218,7 @@ public class ScienceProject extends Application implements EventHandler
 		displayInfo.setTextAlignment(TextAlignment.JUSTIFY);
 		
 		source = new Text(700, 300, "DRAG ME");
-      	target = new Text(1000, 300, "______________");
+      	target = new Text(1000, 600, "______________");
       	
       	
       	menu = new ComboBox<String>(menuOptions);

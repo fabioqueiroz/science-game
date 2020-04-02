@@ -46,6 +46,7 @@ public class Questionnaire
 	
 	public String displayQuestions()
 	{
-		return getQuestionOne() + "\n" + getQuestionTwo() + "\n" + getQuestionThree() + "\n" + getQuestionFour() + "\n";
+		return getQuestionOne() + "\n\n" + "Answer: " + "\n\n" + getQuestionTwo() + "\n\n" + "Answer: " + "\n\n" 
+				+ getQuestionThree() + "\n\n" + "Answer: " + "\n\n" + getQuestionFour() + "\n\n" + "Answer: " + "\n\n";
 	}
 }
