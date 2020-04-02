@@ -23,3 +23,7 @@
 .text {
 	-fx-font-size: 25px;
 }
+
+#quiz {
+	-fx-font-style: italic;
+}

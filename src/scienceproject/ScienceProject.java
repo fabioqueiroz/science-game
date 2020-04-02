@@ -48,7 +48,7 @@ public class ScienceProject extends Application implements EventHandler
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
-	Button rainButton, daysButton, resetButton;
+	Button rainButton, daysButton, resetButton, checkAnswerButton;
 	Label plantName, displayDays;
 	Text displayInfo, displayQuestions;
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
@@ -96,6 +96,12 @@ public class ScienceProject extends Application implements EventHandler
 			content.generateNewQuiz();
 			questionnaire = content.getQuestionnaire();
 			displayQuestions.setText(questionnaire.displayQuestions());
+			
+			targetOne.setText("1) ______________");
+	      	targetTwo.setText("2) ______________");
+	      	targetThree.setText("3) ______________");
+	      	targetFour.setText("4) ______________");
+	      	
 		}
 		
 	};
@@ -162,14 +168,14 @@ public class ScienceProject extends Application implements EventHandler
 		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
 		
 		root = new Pane();
-		scene = new Scene(root,1400,800);
+		scene = new Scene(root,1500,800);
 		scene.getStylesheets().add(stylesheet);
 	
 		stage.setTitle("Plant growth stages");
 		stage.setScene(scene);
 		stage.show();
 		
-		canvas = new Canvas(1400,800);
+		canvas = new Canvas(1500,800);
 		gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
@@ -183,6 +189,9 @@ public class ScienceProject extends Application implements EventHandler
 		
 		resetButton = ComponentGenerator.createButton("Start again!", 700, 700);
 		resetButton.setOnAction(this);
+		
+		checkAnswerButton = ComponentGenerator.createButton("Check answers", 1200, 700);
+		checkAnswerButton.setOnAction(this);
 		
 		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
 		grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
@@ -207,16 +216,17 @@ public class ScienceProject extends Application implements EventHandler
 		sourceThree = new Text(700, 300, "DRAG ME 3");
 		sourceFour = new Text(700, 350, "DRAG ME 4");
 		
-      	targetOne = new Text(1000, 150, "______________");
-      	targetTwo = new Text(1000, 250, "______________");
-      	targetThree = new Text(1000, 350, "______________");
-      	targetFour = new Text(1000, 750, "______________");
+		targetOne = new Text(900, 450, "");
+      	targetTwo = new Text(900, 500, "");
+      	targetThree = new Text(900, 550, "");
+      	targetFour = new Text(900, 600, "");
       	
       	
       	menu = new ComboBox<String>(menuOptions);
       	menu.setLayoutX(700);
       	menu.setLayoutY(10);
       	menu.setValue("Choose quiz");
+      	menu.setStyle("-fx-font-size: 20");
       	
       	menu.getSelectionModel().selectedItemProperty().addListener(menuListener);
       	
@@ -227,11 +237,13 @@ public class ScienceProject extends Application implements EventHandler
       	// Display the questions area
       	displayQuestions = new Text("Select a topic and answer the questions");
       	ComponentGenerator.createTextBlock(displayQuestions, 900, 100, 450, 20);
+      	//displayQuestions.setId("quiz");
+      	displayQuestions.setStyle("-fx-border-style: solid;");
 
 		
       	// Build the solution
         root.getChildren()
-        	.addAll(canvas, rainButton, daysButton, resetButton, plantName, 
+        	.addAll(canvas, rainButton, daysButton, resetButton, checkAnswerButton, plantName, 
         			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
         			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu);
 
@@ -304,17 +316,24 @@ public class ScienceProject extends Application implements EventHandler
 		if(event.getSource() == this.resetButton && quizBuilder != null)
 		{
 			sourceOne.setText("DRAG ME AGAIN 1");
-			targetOne.setText("______________");
 			sourceTwo.setText("DRAG ME AGAIN 2");
-			targetTwo.setText("______________");
 			sourceThree.setText("DRAG ME AGAIN 3");
-			targetThree.setText("______________");
 			sourceFour.setText("DRAG ME AGAIN 4");
-			targetFour.setText("______________");
 			
-			menu.setValue("Choose topic");
+//			targetOne.setText("");
+//	      	targetTwo.setText("");
+//	      	targetThree.setText("");
+//	      	targetFour.setText("");
+			
+			menu.setValue("Choose quiz");
 			
 			displayQuestions.setText("Select a topic and answer the questions");
+			
+		}
+		
+		if(event.getSource() == this.checkAnswerButton)
+		{
+			//System.out.println("clicked");	
 			
 		}
 		

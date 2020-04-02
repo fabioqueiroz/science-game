@@ -1,5 +1,7 @@
 package builder;
 
+import javafx.scene.text.Text;
+
 public class Questionnaire 
 {
 	String questionOne, questionTwo, questionThree, questionFour;
@@ -44,9 +46,10 @@ public class Questionnaire
 		this.questionFour = questionFour;
 	}
 	
+
 	public String displayQuestions()
 	{
-		return getQuestionOne() + "\n\n" + "Answer: " + "\n\n" + getQuestionTwo() + "\n\n" + "Answer: " + "\n\n" 
-				+ getQuestionThree() + "\n\n" + "Answer: " + "\n\n" + getQuestionFour() + "\n\n" + "Answer: " + "\n\n";
+		return getQuestionOne() + "\n\n\n" + getQuestionTwo() + "\n\n\n" 
+				+ getQuestionThree() + "\n\n\n" + getQuestionFour() + "\n\n\n" + "Answers: " + "\n\n";
 	}
 }

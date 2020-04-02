@@ -1,5 +1,7 @@
 package builder;
 
+import javafx.scene.text.Text;
+
 public class ContentCreator 
 {
 	QuizBuilder quizBuilder;

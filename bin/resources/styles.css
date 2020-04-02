@@ -16,5 +16,10 @@
 .label {
 	-fx-font-size: 25px;
 	-fx-text-fill: white;
-	-fx-background-color: green;
+	-fx-background-color: rgb(10, 8, 49);
+
+}
+
+.text {
+	-fx-font-size: 25px;
 }
