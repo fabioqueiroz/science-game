@@ -10,6 +10,7 @@ import builder.QuizThreeBuilder;
 import builder.QuizTwoBuilder;
 import crosscutting.ComponentGenerator;
 import crosscutting.DragAndDropEventGenerator;
+import crosscutting.QuizValidator;
 import factory.InformationFactory;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -49,7 +50,7 @@ public class ScienceProject extends Application implements EventHandler
 	Canvas canvas;
 	GraphicsContext gc;
 	Button rainButton, daysButton, resetButton, checkAnswerButton;
-	Label plantName, displayDays;
+	Label plantName, displayDays, marks;
 	Text displayInfo, displayQuestions;
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
 	Rectangle soil, grass;
@@ -209,6 +210,7 @@ public class ScienceProject extends Application implements EventHandler
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
+		marks = ComponentGenerator.createLabel("", 1200, 650);
 		
 		// Add new objects to the array lists
 		gameObjects.add(new Seed(200,450, gc));
@@ -256,7 +258,7 @@ public class ScienceProject extends Application implements EventHandler
         root.getChildren()
         	.addAll(canvas, rainButton, daysButton, resetButton, checkAnswerButton, plantName, 
         			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
-        			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu);
+        			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu, marks);
 
         // Source 1, Target 1
      	DragAndDropEventGenerator.DragAndDropCreator(sourceOne, targetOne);
@@ -335,13 +337,15 @@ public class ScienceProject extends Application implements EventHandler
 			menu.setValue("Choose quiz");
 			
 			displayQuestions.setText("Select a topic and answer the questions");
+			marks.setText("");
 			
 		}
 		
 		if(event.getSource() == this.checkAnswerButton)
 		{
-			//System.out.println("clicked");	
-			
+						
+			int result = QuizValidator.checkMatch(targetOne, targetTwo, targetThree, targetFour, questionnaire.getAnswers());
+			marks.setText("Marks: " + result + "%");
 		}
 		
 	}
