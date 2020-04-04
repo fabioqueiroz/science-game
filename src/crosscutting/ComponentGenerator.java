@@ -49,5 +49,14 @@ public class ComponentGenerator
 		text.setTextAlignment(TextAlignment.JUSTIFY);
 
 	}
+	
+	public static Text createText(double x, double y, String title)
+	{
+		Text text = new Text(x, y, title);
+		text.setId("quiz");
+		
+		return text;
+	}
+	
 
 }

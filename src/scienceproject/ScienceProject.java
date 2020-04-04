@@ -31,6 +31,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -45,7 +46,9 @@ import javafx.stage.Stage;
 @SuppressWarnings("rawtypes")
 public class ScienceProject extends Application implements EventHandler
 {	
-	Pane root;
+	FlowPane root;
+	//Pane root;
+	Pane plantArea, quizMenuArea;
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
@@ -53,7 +56,7 @@ public class ScienceProject extends Application implements EventHandler
 	Label plantName, displayDays, marks;
 	Text displayInfo, displayQuestions;
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
-	Rectangle soil, grass;
+	Rectangle soil, grass, test;
 	InformationFactory informationFactory;
 	ComboBox<String> menu;
 	ContentCreator content;
@@ -179,13 +182,24 @@ public class ScienceProject extends Application implements EventHandler
 	{
 		String stylesheet = getClass().getResource("/resources/styles.css").toExternalForm();
 		
-		root = new Pane();
+//		root = new Pane();
+//		scene = new Scene(root,1500,800);
+//		scene.getStylesheets().add(stylesheet);
+		
+		root = new FlowPane();
 		scene = new Scene(root,1500,800);
 		scene.getStylesheets().add(stylesheet);
 	
 		stage.setTitle("Plant growth stages");
 		stage.setScene(scene);
 		stage.show();
+		
+		plantArea = new Pane();
+		plantArea.setPrefSize(700,800);
+		
+		quizMenuArea = new Pane();
+		quizMenuArea.setPrefSize(800, 800);
+		quizMenuArea.setStyle("-fx-background-color: #ffffc8;");
 		
 		canvas = new Canvas(1500,800);
 		gc = canvas.getGraphicsContext2D();
@@ -199,18 +213,19 @@ public class ScienceProject extends Application implements EventHandler
 		daysButton = ComponentGenerator.createButton("Days counter", 350, 700);
 		daysButton.setOnAction(this);
 		
-		resetButton = ComponentGenerator.createButton("Start again!", 700, 700);
+		resetButton = ComponentGenerator.createButton("Start again!", 10, 700); // 700
 		resetButton.setOnAction(this);
 		
-		checkAnswerButton = ComponentGenerator.createButton("Check answers", 1200, 700);
+		checkAnswerButton = ComponentGenerator.createButton("Check answers", 500, 700); // 1200
 		checkAnswerButton.setOnAction(this);
 		
 		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
 		grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
+		test = ComponentGenerator.createRectangle(5, 650, "#ffffc8", 700, 5);
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
-		marks = ComponentGenerator.createLabel("", 1200, 650);
+		marks = ComponentGenerator.createLabel("", 500, 650);
 		
 		// Add new objects to the array lists
 		gameObjects.add(new Seed(200,450, gc));
@@ -223,20 +238,21 @@ public class ScienceProject extends Application implements EventHandler
 		displayInfo = new Text(informationFactory.getInformation(0).displayTextInfo());
 		ComponentGenerator.createTextBlock(displayInfo, 450, 200, 200, 20);
 		
+		// Create answers to be dragged
+		sourceOne = ComponentGenerator.createText(50, 200, "DRAG ME 1"); // 750
+		sourceTwo = ComponentGenerator.createText(50, 250, "DRAG ME 2");
+		sourceThree = ComponentGenerator.createText(50, 300, "DRAG ME 3");
+		sourceFour = ComponentGenerator.createText(50, 350, "DRAG ME 4"); 
 		
-		sourceOne = new Text(700, 200, "DRAG ME 1");
-		sourceTwo = new Text(700, 250, "DRAG ME 2");
-		sourceThree = new Text(700, 300, "DRAG ME 3");
-		sourceFour = new Text(700, 350, "DRAG ME 4");
-		
-		targetOne = new Text(900, 450, "");
-      	targetTwo = new Text(900, 500, "");
-      	targetThree = new Text(900, 550, "");
-      	targetFour = new Text(900, 600, "");
-      	
-      	
+		// Create target destinations
+		targetOne = ComponentGenerator.createText(300, 450, ""); // 900
+      	targetTwo = ComponentGenerator.createText(300, 500, "");
+      	targetThree = ComponentGenerator.createText(300, 550, "");
+      	targetFour = ComponentGenerator.createText(300, 600, "");
+
+      	// Create quiz menu
       	menu = new ComboBox<String>(menuOptions);
-      	menu.setLayoutX(700);
+      	menu.setLayoutX(10); // 700
       	menu.setLayoutY(10);
       	menu.setValue("Choose quiz");
       	menu.setStyle("-fx-font-size: 20");
@@ -248,17 +264,30 @@ public class ScienceProject extends Application implements EventHandler
       	quizBuilder = null;
       	
       	// Display the questions area
-      	displayQuestions = new Text("Select a topic and answer the questions");
-      	ComponentGenerator.createTextBlock(displayQuestions, 900, 100, 450, 20);
+      	displayQuestions = new Text("Select a topic and drag an answer");
+      	ComponentGenerator.createTextBlock(displayQuestions, 300, 50, 450, 20); // 900
       	//displayQuestions.setId("quiz");
       	displayQuestions.setStyle("-fx-border-style: solid;");
 
 		
-      	// Build the solution
-        root.getChildren()
-        	.addAll(canvas, rainButton, daysButton, resetButton, checkAnswerButton, plantName, 
-        			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
-        			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu, marks);
+//      	// Build the solution
+//        root.getChildren()
+//        	.addAll(canvas, rainButton, daysButton, resetButton, checkAnswerButton, plantName, 
+//        			soil, grass, displayDays, displayInfo, sourceOne, sourceTwo, sourceThree, sourceFour,
+//        			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu, marks); // test
+        
+     
+     	// Build the solution     	
+      	// plant pane
+      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
+      	
+      	// quiz pane
+      	quizMenuArea.getChildren().addAll(resetButton, checkAnswerButton, sourceOne, sourceTwo, sourceThree, sourceFour,
+     			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu, marks);
+      	     	
+      	// flow pane
+      	root.getChildren().addAll(plantArea, quizMenuArea);
+              
 
         // Source 1, Target 1
      	DragAndDropEventGenerator.DragAndDropCreator(sourceOne, targetOne);
@@ -341,9 +370,8 @@ public class ScienceProject extends Application implements EventHandler
 			
 		}
 		
-		if(event.getSource() == this.checkAnswerButton)
-		{
-						
+		if(event.getSource() == this.checkAnswerButton && quizBuilder != null)
+		{						
 			int result = QuizValidator.checkMatch(targetOne, targetTwo, targetThree, targetFour, questionnaire.getAnswers());
 			marks.setText("Marks: " + result + "%");
 		}

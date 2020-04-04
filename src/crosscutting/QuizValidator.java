@@ -26,9 +26,7 @@ public class QuizValidator
 		{
 			correct++;
 		}
-		
-		System.out.println(calculateMark(correct));
-		
+			
 		return calculateMark(correct);
 	}
 	
