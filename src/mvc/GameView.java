@@ -1,14 +1,11 @@
 package mvc;
 
-import java.util.ArrayList;
-import java.util.Random;
 import builder.ContentCreator;
 import builder.Questionnaire;
 import builder.QuizBuilder;
 import crosscutting.ComponentGenerator;
 import crosscutting.DragAndDropEventGenerator;
 import factory.InformationFactory;
-import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -23,10 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import scienceproject.Cloud;
-import scienceproject.GameObject;
-import scienceproject.Seed;
-import scienceproject.WaterDroplet;
+
 
 public class GameView 
 {
@@ -51,13 +45,7 @@ public class GameView
 	int noOfDays;
 	
 	GameObjectModel model;
-	
-//	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-//	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
-	
-//	Random rnd = new Random(System.currentTimeMillis());
-//	int count = 0;
-	
+		
 	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
 	
 	public GameView(FlowPane root, GameObjectModel model) 
@@ -82,17 +70,10 @@ public class GameView
 		gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
 		// Create UI buttons and layout
-		rainButton = ComponentGenerator.createButton("Let it rain!", 50, 700);
-		//rainButton.setOnAction(this);
-		
+		rainButton = ComponentGenerator.createButton("Let it rain!", 50, 700);		
 		daysButton = ComponentGenerator.createButton("Days counter", 350, 700);
-		//daysButton.setOnAction(this);
-		
 		resetButton = ComponentGenerator.createButton("Start again!", 20, 700); 
-		//resetButton.setOnAction(this);
-		
 		checkAnswerButton = ComponentGenerator.createButton("Check answers", 300, 700); 
-		//checkAnswerButton.setOnAction(this);
 		
 		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
 		grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
@@ -101,12 +82,7 @@ public class GameView
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
 		marks = ComponentGenerator.createLabel("", 300, 650);
-		
-//		// Add new objects to the array lists  
-//		gameObjects.add(new Seed(200,450, gc));
-//		droplets.add(new Cloud(1, 1, gc));
-//		droplets.add(new Cloud(405, 1, gc)); 
-		
+			
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
 			
@@ -131,8 +107,6 @@ public class GameView
       	menu.setLayoutY(10);
       	menu.setValue("Choose quiz");
       	menu.setStyle("-fx-font-size: 20");
-      	
-      	//menu.getSelectionModel().selectedItemProperty().addListener(menuListener); ********** CONTROLLER ********
       	
       	// Quiz generator
       	content = new ContentCreator();
@@ -174,51 +148,4 @@ public class GameView
     	DragAndDropEventGenerator.DragAndDropCreator(sourceFour, targetFour);
 	}
 	
-
-//	AnimationTimer timer = new AnimationTimer() 
-//	{
-//
-//		@Override
-//		public void handle(long arg0) 
-//		{
-//
-//			if(count++ > 10) 
-//			{
-//				droplets.add(new Cloud(rnd.nextInt(1),rnd.nextInt(1), gc));
-//				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
-//				count = 0;
-//			}
-//					
-//			for (GameObject droplet : droplets)
-//			{
-//				
-//				for (GameObject gameObject : gameObjects) 
-//				{
-//					if (gameObject.getRectangle().getBoundsInParent()
-//							.intersects(droplet.getX(), droplet.getY() - 80, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
-//					{
-//						((WaterDroplet)droplet).changeToBlankImage();
-//						
-//						//System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
-//						//System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
-//						//System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
-//
-//					} 
-//
-//					else 
-//					{
-//						if (droplet instanceof WaterDroplet) 
-//						{						
-//							((WaterDroplet)droplet).move();
-//						}
-//
-//					}
-//				}
-//				
-//			}	
-//						
-//		}
-//		
-//	};
-
 }

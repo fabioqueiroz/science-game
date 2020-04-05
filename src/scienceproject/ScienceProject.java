@@ -40,7 +40,7 @@ import mvc.GameObjectModel;
 import mvc.GameView;
 
 @SuppressWarnings("rawtypes")
-public class ScienceProject extends Application implements EventHandler
+public class ScienceProject extends Application //implements EventHandler
 {	
 	FlowPane root;
 	Pane plantArea, menuArea, quizArea;
@@ -70,108 +70,108 @@ public class ScienceProject extends Application implements EventHandler
 	boolean isRainButtonClicked;
 	int noOfDays;
 	
-	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
+//	ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+//	ArrayList<GameObject> droplets = new ArrayList<GameObject>();
+//	
+//	// Define the questionnaire topics and listen to changes
+//	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
+//	ChangeListener menuListener = new ChangeListener() 
+//	{
+//		
+//		@Override
+//		public void changed(ObservableValue observable, Object oldValue, Object newValue) 
+//		{
+//						
+//			if (observable.getValue().equals("Topic 1")) 
+//			{
+//				quizBuilder = new QuizOneBuilder();
+//
+//			}
+//			
+//			if (observable.getValue().equals("Topic 2")) 
+//			{
+//				quizBuilder = new QuizTwoBuilder();
+//
+//			}
+//			
+//			if (observable.getValue().equals("Topic 3")) 
+//			{
+//				quizBuilder = new QuizThreeBuilder();
+//
+//			}		
+//			
+//			content.setQuizBuilder(quizBuilder);
+//			content.generateNewQuiz();
+//			questionnaire = content.getQuestionnaire();
+//			displayQuestions.setText(questionnaire.displayQuestions());
+//			
+//			
+//			for (int i = 0; i < questionnaire.getAnswers().size(); i++) 
+//			{
+//				sourceOne.setText(questionnaire.getAnswers().get(0));
+//				sourceTwo.setText(questionnaire.getAnswers().get(1));
+//				sourceThree.setText(questionnaire.getAnswers().get(2));
+//				sourceFour.setText(questionnaire.getAnswers().get(3));
+//			}
+//			
+//			targetOne.setText("1) ______________");
+//	      	targetTwo.setText("2) ______________");
+//	      	targetThree.setText("3) ______________");
+//	      	targetFour.setText("4) ______________");
+//	      	
+//		}
+//		
+//	};
+//			
+//	
+//	Random rnd = new Random(System.currentTimeMillis());
+//	int count = 0;
 	
-	// Define the questionnaire topics and listen to changes
-	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
-	ChangeListener menuListener = new ChangeListener() 
-	{
-		
-		@Override
-		public void changed(ObservableValue observable, Object oldValue, Object newValue) 
-		{
-						
-			if (observable.getValue().equals("Topic 1")) 
-			{
-				quizBuilder = new QuizOneBuilder();
-
-			}
-			
-			if (observable.getValue().equals("Topic 2")) 
-			{
-				quizBuilder = new QuizTwoBuilder();
-
-			}
-			
-			if (observable.getValue().equals("Topic 3")) 
-			{
-				quizBuilder = new QuizThreeBuilder();
-
-			}		
-			
-			content.setQuizBuilder(quizBuilder);
-			content.generateNewQuiz();
-			questionnaire = content.getQuestionnaire();
-			displayQuestions.setText(questionnaire.displayQuestions());
-			
-			
-			for (int i = 0; i < questionnaire.getAnswers().size(); i++) 
-			{
-				sourceOne.setText(questionnaire.getAnswers().get(0));
-				sourceTwo.setText(questionnaire.getAnswers().get(1));
-				sourceThree.setText(questionnaire.getAnswers().get(2));
-				sourceFour.setText(questionnaire.getAnswers().get(3));
-			}
-			
-			targetOne.setText("1) ______________");
-	      	targetTwo.setText("2) ______________");
-	      	targetThree.setText("3) ______________");
-	      	targetFour.setText("4) ______________");
-	      	
-		}
-		
-	};
-			
-	
-	Random rnd = new Random(System.currentTimeMillis());
-	int count = 0;
-	
-	AnimationTimer timer = new AnimationTimer() 
-	{
-
-		@Override
-		public void handle(long arg0) 
-		{
-
-			if(count++ > 10) 
-			{
-				droplets.add(new Cloud(rnd.nextInt(1),rnd.nextInt(1), gc));
-				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
-				count = 0;
-			}
-					
-			for (GameObject droplet : droplets)
-			{
-				
-				for (GameObject gameObject : gameObjects) 
-				{
-					if (gameObject.getRectangle().getBoundsInParent()
-							.intersects(droplet.getX(), droplet.getY() - 80, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
-					{
-						((WaterDroplet)droplet).changeToBlankImage();
-						
-						//System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
-						//System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
-						//System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
-
-					} 
-
-					else 
-					{
-						if (droplet instanceof WaterDroplet) 
-						{						
-							((WaterDroplet)droplet).move();
-						}
-
-					}
-				}
-				
-			}	
-						
-		}
-		
-	};
+//	AnimationTimer timer = new AnimationTimer() 
+//	{
+//
+//		@Override
+//		public void handle(long arg0) 
+//		{
+//
+//			if(count++ > 10) 
+//			{
+//				droplets.add(new Cloud(rnd.nextInt(1),rnd.nextInt(1), gc));
+//				droplets.add(new WaterDroplet(rnd.nextInt(400),rnd.nextInt(200), gc));
+//				count = 0;
+//			}
+//					
+//			for (GameObject droplet : droplets)
+//			{
+//				
+//				for (GameObject gameObject : gameObjects) 
+//				{
+//					if (gameObject.getRectangle().getBoundsInParent()
+//							.intersects(droplet.getX(), droplet.getY() - 80, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
+//					{
+//						((WaterDroplet)droplet).changeToBlankImage();
+//						
+//						//System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
+//						//System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
+//						//System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
+//
+//					} 
+//
+//					else 
+//					{
+//						if (droplet instanceof WaterDroplet) 
+//						{						
+//							((WaterDroplet)droplet).move();
+//						}
+//
+//					}
+//				}
+//				
+//			}	
+//						
+//		}
+//		
+//	};
 	
 	public static void main(String[] args) 
 	{
@@ -311,81 +311,81 @@ public class ScienceProject extends Application implements EventHandler
 						
 	}
 
-	@Override
-	public void handle(Event event) 
-	{
-		
-		if(event.getSource() == this.rainButton)
-		{
-			timer.start();
-					
-			isRainButtonClicked = true;	
-			
-		}
-	
-		if(event.getSource() == this.daysButton)
-		{
-			
-			if (isRainButtonClicked) 
-			{
-				
-				for (GameObject gameObject : gameObjects) 
-				{
-					((Seed)gameObject).changeGrowthStage();
-				}
-				
-				
-				this.daysButton.setOnMouseClicked(new EventHandler<MouseEvent>() 
-				{
-				
-					@Override
-					public void handle(MouseEvent mouseEvent) 
-					{
-						noOfDays++;
-																					
-						if(noOfDays >= 0 && noOfDays <= 6)
-						{
-							plantName.setText(informationFactory.getInformation(noOfDays).displayName());
-							displayDays.setText(Integer.toString(noOfDays) + " days");
-							displayInfo.setText(informationFactory.getInformation(noOfDays).displayTextInfo());
-						}
-						
-						else
-						{
-							plantName.setText("");
-							displayDays.setText("");
-							displayInfo.setText("");
-						}					
-
-					}			
-					
-				});
-				
-			}
-		
-		}	
-		
-		if(event.getSource() == this.resetButton && quizBuilder != null)
-		{
-			
-			sourceOne.setText("");
-			sourceTwo.setText("");
-			sourceThree.setText("");
-			sourceFour.setText("");
-
-			menu.setValue("Choose quiz");
-			
-			displayQuestions.setText("Select a topic and answer the questions");
-			marks.setText("");
-			
-		}
-		
-		if(event.getSource() == this.checkAnswerButton && quizBuilder != null)
-		{						
-			int result = QuizValidator.checkMatch(targetOne, targetTwo, targetThree, targetFour, questionnaire.getAnswers());
-			marks.setText("Marks: " + result + "%");
-		}
-		
-	}
+//	@Override
+//	public void handle(Event event) 
+//	{
+//		
+//		if(event.getSource() == this.rainButton)
+//		{
+//			timer.start();
+//					
+//			isRainButtonClicked = true;	
+//			
+//		}
+//	
+//		if(event.getSource() == this.daysButton)
+//		{
+//			
+//			if (isRainButtonClicked) 
+//			{
+//				
+//				for (GameObject gameObject : gameObjects) 
+//				{
+//					((Seed)gameObject).changeGrowthStage();
+//				}
+//				
+//				
+//				this.daysButton.setOnMouseClicked(new EventHandler<MouseEvent>() 
+//				{
+//				
+//					@Override
+//					public void handle(MouseEvent mouseEvent) 
+//					{
+//						noOfDays++;
+//																					
+//						if(noOfDays >= 0 && noOfDays <= 6)
+//						{
+//							plantName.setText(informationFactory.getInformation(noOfDays).displayName());
+//							displayDays.setText(Integer.toString(noOfDays) + " days");
+//							displayInfo.setText(informationFactory.getInformation(noOfDays).displayTextInfo());
+//						}
+//						
+//						else
+//						{
+//							plantName.setText("");
+//							displayDays.setText("");
+//							displayInfo.setText("");
+//						}					
+//
+//					}			
+//					
+//				});
+//				
+//			}
+//		
+//		}	
+//		
+//		if(event.getSource() == this.resetButton && quizBuilder != null)
+//		{
+//			
+//			sourceOne.setText("");
+//			sourceTwo.setText("");
+//			sourceThree.setText("");
+//			sourceFour.setText("");
+//
+//			menu.setValue("Choose quiz");
+//			
+//			displayQuestions.setText("Select a topic and answer the questions");
+//			marks.setText("");
+//			
+//		}
+//		
+//		if(event.getSource() == this.checkAnswerButton && quizBuilder != null)
+//		{						
+//			int result = QuizValidator.checkMatch(targetOne, targetTwo, targetThree, targetFour, questionnaire.getAnswers());
+//			marks.setText("Marks: " + result + "%");
+//		}
+//		
+//	}
 
 }
