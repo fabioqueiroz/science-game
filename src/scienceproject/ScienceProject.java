@@ -261,7 +261,7 @@ public class ScienceProject extends Application implements EventHandler
       	// Create a shadow effect display for the questions
       	shadowBoxPane = new StackPane();
       	shadowBoxPane.setLayoutX(40);
-      	shadowRectangle = ComponentGenerator.createShadowEffectRectangle();
+      	shadowRectangle = ComponentGenerator.createShadowEffectRectangle(450, 620, 1, 20, 30, 15, 15, 10);
      
      	// Build the solution     	
       	// plant pane
@@ -277,7 +277,7 @@ public class ScienceProject extends Application implements EventHandler
       	// flow pane
       	root.getChildren().addAll(plantArea, menuArea, quizArea);
               
-
+      	
         // Source 1, Target 1
      	DragAndDropEventGenerator.DragAndDropCreator(sourceOne, targetOne);
      	// Source 2, Target 2

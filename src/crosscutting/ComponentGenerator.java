@@ -3,7 +3,6 @@ package crosscutting;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -69,20 +68,21 @@ public class ComponentGenerator
 		return text;
 	}
 	
-	public static Rectangle createShadowEffectRectangle()
+	public static Rectangle createShadowEffectRectangle(double rectWidth, double rectHeight, double strokeWidth, double effectWidth, 
+			double effectHeight, double effectX, double effectY, double effectRadius)
 	{
 		
-		Rectangle rectangle = new Rectangle(450, 620);
+		Rectangle rectangle = new Rectangle(rectWidth, rectHeight);
 	    rectangle.setFill(Color.WHITESMOKE);
 	    rectangle.setStroke(Color.LIGHTGREY);
-	    rectangle.setStrokeWidth(1);
+	    rectangle.setStrokeWidth(strokeWidth);
 	    		
 		DropShadow shadowEffect = new DropShadow();
-	    shadowEffect.setWidth(20);
-		shadowEffect.setHeight(30);
-        shadowEffect.setOffsetX(15);
-		shadowEffect.setOffsetY(15);
-		shadowEffect.setRadius(10);
+	    shadowEffect.setWidth(effectWidth);
+		shadowEffect.setHeight(effectHeight);
+        shadowEffect.setOffsetX(effectX);
+		shadowEffect.setOffsetY(effectY);
+		shadowEffect.setRadius(effectRadius);
 		rectangle.setEffect(shadowEffect);
 		
 		return rectangle;
