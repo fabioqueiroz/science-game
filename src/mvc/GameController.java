@@ -141,9 +141,9 @@ public class GameController implements EventHandler
 					{
 						((WaterDroplet)droplet).changeToBlankImage();
 						
-						//System.out.println("Intersected at: x= " + droplet.getX() + ", y= " + droplet.getY());
-						//System.out.println("Plant at: x= " + gameObject.getX() + ", y= " + gameObject.getY());
-						//System.out.println("Bounds: x= " + droplet.getRectangle().getBoundsInParent());
+						//System.out.println("Intersected at: x= " + model.droplet.getX() + ", y= " + model.droplet.getY());
+						//System.out.println("Plant at: x= " + model.gameObject.getX() + ", y= " + model.gameObject.getY());
+						//System.out.println("Bounds: x= " + model.droplet.getRectangle().getBoundsInParent());
 
 					} 
 
