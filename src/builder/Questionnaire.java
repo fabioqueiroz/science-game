@@ -90,7 +90,7 @@ public class Questionnaire
 	public String displayQuestions()
 	{
 		return getQuestionOne() + "\n\n\n" + getQuestionTwo() + "\n\n\n" 
-				+ getQuestionThree() + "\n\n\n" + getQuestionFour() + "\n\n\n" + "Answers: " + "\n\n";
+				+ getQuestionThree() + "\n\n\n" + getQuestionFour() + "\n\n\n" + "Answers: " + "\n";
 	}
 	
 	public ArrayList<String> getAnswers()

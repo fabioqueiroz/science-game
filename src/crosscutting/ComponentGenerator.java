@@ -2,6 +2,9 @@ package crosscutting;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -50,13 +53,40 @@ public class ComponentGenerator
 
 	}
 	
-	public static Text createText(double x, double y, String title)
+	public static Text createText(double x, double y, String title, String sourceOrTarget)
 	{
 		Text text = new Text(x, y, title);
-		text.setId("quiz");
+		
+		if (sourceOrTarget.equals("source")) 
+		{
+			text.setId("menu");
+		} 
+		else 
+		{
+			text.setId("quiz");
+		}
 		
 		return text;
 	}
 	
+	public static Rectangle createShadowEffectRectangle()
+	{
+		
+		Rectangle rectangle = new Rectangle(450, 620);
+	    rectangle.setFill(Color.WHITESMOKE);
+	    rectangle.setStroke(Color.LIGHTGREY);
+	    rectangle.setStrokeWidth(1);
+	    		
+		DropShadow shadowEffect = new DropShadow();
+	    shadowEffect.setWidth(20);
+		shadowEffect.setHeight(30);
+        shadowEffect.setOffsetX(15);
+		shadowEffect.setOffsetY(15);
+		shadowEffect.setRadius(10);
+		rectangle.setEffect(shadowEffect);
+		
+		return rectangle;
+
+	}
 
 }

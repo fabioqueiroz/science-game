@@ -23,8 +23,16 @@
 	-fx-font-size: 25px;
 }
 
-#quiz {
+#menu, #quiz {
 	-fx-font-size: 18px;
 	-fx-font-weight: bold;
 	-fx-cursor: move;
+}
+
+#menu {
+	-fx-fill: white;
+}
+
+#menu .button {
+	-fx-background-color: white;
 }
