@@ -48,7 +48,7 @@ public class ScienceProject extends Application implements EventHandler
 {	
 	FlowPane root;
 	//Pane root;
-	Pane plantArea, quizMenuArea;
+	Pane plantArea, menuArea, quizArea;
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
@@ -197,9 +197,13 @@ public class ScienceProject extends Application implements EventHandler
 		plantArea = new Pane();
 		plantArea.setPrefSize(700,800);
 		
-		quizMenuArea = new Pane();
-		quizMenuArea.setPrefSize(800, 800);
-		quizMenuArea.setStyle("-fx-background-color: #ffffc8;");
+		menuArea = new Pane();
+		menuArea.setPrefSize(200, 800);
+		menuArea.setStyle("-fx-background-color: #ffffc8;");
+		
+		quizArea = new Pane();
+		quizArea.setPrefSize(600, 800);
+		quizArea.setStyle("-fx-background-color: white;");
 		
 		canvas = new Canvas(1500,800);
 		gc = canvas.getGraphicsContext2D();
@@ -213,10 +217,10 @@ public class ScienceProject extends Application implements EventHandler
 		daysButton = ComponentGenerator.createButton("Days counter", 350, 700);
 		daysButton.setOnAction(this);
 		
-		resetButton = ComponentGenerator.createButton("Start again!", 10, 700); // 700
+		resetButton = ComponentGenerator.createButton("Start again!", 20, 700); // 700
 		resetButton.setOnAction(this);
 		
-		checkAnswerButton = ComponentGenerator.createButton("Check answers", 500, 700); // 1200
+		checkAnswerButton = ComponentGenerator.createButton("Check answers", 300, 700); // 1200
 		checkAnswerButton.setOnAction(this);
 		
 		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
@@ -225,7 +229,7 @@ public class ScienceProject extends Application implements EventHandler
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
-		marks = ComponentGenerator.createLabel("", 500, 650);
+		marks = ComponentGenerator.createLabel("", 300, 650);
 		
 		// Add new objects to the array lists
 		gameObjects.add(new Seed(200,450, gc));
@@ -245,10 +249,10 @@ public class ScienceProject extends Application implements EventHandler
 		sourceFour = ComponentGenerator.createText(50, 350, "DRAG ME 4"); 
 		
 		// Create target destinations
-		targetOne = ComponentGenerator.createText(300, 450, ""); // 900
-      	targetTwo = ComponentGenerator.createText(300, 500, "");
-      	targetThree = ComponentGenerator.createText(300, 550, "");
-      	targetFour = ComponentGenerator.createText(300, 600, "");
+		targetOne = ComponentGenerator.createText(100, 450, ""); // 900
+      	targetTwo = ComponentGenerator.createText(100, 500, "");
+      	targetThree = ComponentGenerator.createText(100, 550, "");
+      	targetFour = ComponentGenerator.createText(100, 600, "");
 
       	// Create quiz menu
       	menu = new ComboBox<String>(menuOptions);
@@ -265,7 +269,7 @@ public class ScienceProject extends Application implements EventHandler
       	
       	// Display the questions area
       	displayQuestions = new Text("Select a topic and drag an answer");
-      	ComponentGenerator.createTextBlock(displayQuestions, 300, 50, 450, 20); // 900
+      	ComponentGenerator.createTextBlock(displayQuestions, 100, 50, 450, 20); // 900
       	//displayQuestions.setId("quiz");
       	displayQuestions.setStyle("-fx-border-style: solid;");
 
@@ -281,12 +285,14 @@ public class ScienceProject extends Application implements EventHandler
       	// plant pane
       	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
       	
+      	// menu pane
+      	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);
+      	
       	// quiz pane
-      	quizMenuArea.getChildren().addAll(resetButton, checkAnswerButton, sourceOne, sourceTwo, sourceThree, sourceFour,
-     			targetOne, targetTwo, targetThree, targetFour, displayQuestions, menu, marks);
+      	quizArea.getChildren().addAll(displayQuestions, targetOne, targetTwo, targetThree, targetFour, marks, checkAnswerButton);
       	     	
       	// flow pane
-      	root.getChildren().addAll(plantArea, quizMenuArea);
+      	root.getChildren().addAll(plantArea, menuArea, quizArea);
               
 
         // Source 1, Target 1
