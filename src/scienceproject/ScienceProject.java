@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -166,7 +167,7 @@ public class ScienceProject extends Application implements EventHandler
 		launch(args);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "static-access" })
 	@Override
 	public void start(Stage stage) throws Exception 
 	{
@@ -256,25 +257,26 @@ public class ScienceProject extends Application implements EventHandler
       	// Display the questions area
       	displayQuestions = new Text("Select a topic and drag the answers");
       	ComponentGenerator.createTextBlock(displayQuestions, 100, 50, 450, 20);
-      	displayQuestions.setStyle("-fx-border-style: solid;");
       	
       	// Create a shadow effect display for the questions
       	shadowBoxPane = new StackPane();
-      	shadowBoxPane.setLayoutX(40);
+      	shadowBoxPane.setLayoutX(40); 
       	shadowRectangle = ComponentGenerator.createShadowEffectRectangle(450, 620, 1, 20, 30, 15, 15, 10);
      
      	// Build the solution     	
-      	// plant pane
+      	// Plant pane
       	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
       	
-      	// menu pane
+      	// Menu pane
       	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);
       	
-      	// quiz pane
-      	shadowBoxPane.getChildren().addAll(shadowRectangle, displayQuestions);
+      	// Quiz pane
+      	shadowBoxPane.getChildren().addAll(shadowRectangle, displayQuestions); 
+      	//shadowBoxPane.setAlignment(displayQuestions, Pos.TOP_CENTER);
+      	
       	quizArea.getChildren().addAll(shadowBoxPane, targetOne, targetTwo, targetThree, targetFour, marks, checkAnswerButton);
       	     	
-      	// flow pane
+      	// Flow pane
       	root.getChildren().addAll(plantArea, menuArea, quizArea);
               
       	

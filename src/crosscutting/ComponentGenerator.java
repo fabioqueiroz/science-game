@@ -73,7 +73,7 @@ public class ComponentGenerator
 	{
 		
 		Rectangle rectangle = new Rectangle(rectWidth, rectHeight);
-	    rectangle.setFill(Color.WHITESMOKE);
+	    rectangle.setFill(Color.web("#F3F5F4"));
 	    rectangle.setStroke(Color.LIGHTGREY);
 	    rectangle.setStrokeWidth(strokeWidth);
 	    		
