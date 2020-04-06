@@ -27,7 +27,7 @@ public class GameView
 {
 	FlowPane root;
 	Pane plantArea, menuArea, quizArea;
-	StackPane shadowBoxPane;
+	StackPane infoShadowPane, shadowBoxPane;
 	Scene scene;
 	Canvas canvas;
 	GraphicsContext gc;
@@ -35,7 +35,7 @@ public class GameView
 	Label plantName, displayDays, marks;
 	Text displayInfo, displayQuestions;
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
-	Rectangle soil, grass, test, shadowRectangle;
+	Rectangle soil, grass, test, infoShadowRectangle, quizShadowRectangle;
 	InformationFactory informationFactory;
 	ComboBox<String> menu;
 	ContentCreator content;
@@ -83,7 +83,7 @@ public class GameView
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
-		marks = ComponentGenerator.createLabel("", 300, 650);
+		marks = ComponentGenerator.createLabel("", 100, 710);
 			
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
@@ -118,20 +118,27 @@ public class GameView
       	displayQuestions = new Text("Select a topic and drag the answers");
       	ComponentGenerator.createTextBlock(displayQuestions, 100, 50, 450, 20);
       	
+      	// Create a shadow effect display plant information
+      	infoShadowPane = new StackPane();
+      	infoShadowPane.setLayoutX(420); 
+      	infoShadowPane.setLayoutY(130); 
+      	infoShadowRectangle = ComponentGenerator.createShadowEffectRectangle(250, 350, 1, 200, 300, 15, 15, 10);
+      	
       	// Create a shadow effect display for the questions
       	shadowBoxPane = new StackPane();
       	shadowBoxPane.setLayoutX(40); 
-      	shadowRectangle = ComponentGenerator.createShadowEffectRectangle(450, 620, 1, 20, 30, 15, 15, 10);
+      	quizShadowRectangle = ComponentGenerator.createShadowEffectRectangle(450, 620, 1, 20, 30, 15, 15, 10);
      
      	// Build the solution     	
       	// Plant pane
-      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, displayInfo);
-      	
+      	infoShadowPane.getChildren().addAll(infoShadowRectangle, displayInfo);
+      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, infoShadowPane); // displayInfo
+      	      	
       	// Menu pane
       	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);
       	
       	// Quiz pane
-      	shadowBoxPane.getChildren().addAll(shadowRectangle, displayQuestions); 
+      	shadowBoxPane.getChildren().addAll(quizShadowRectangle, displayQuestions); 
       	shadowBoxPane.setAlignment(displayQuestions, Pos.TOP_CENTER);
       	
       	quizArea.getChildren().addAll(shadowBoxPane, targetOne, targetTwo, targetThree, targetFour, marks, checkAnswerButton);
