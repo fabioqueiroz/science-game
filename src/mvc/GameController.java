@@ -19,11 +19,11 @@ import scienceproject.WaterDroplet;
 @SuppressWarnings("rawtypes")
 public class GameController implements EventHandler
 {
-	GameObjectModel model;
-	GameView view;
+	private GameObjectModel model;
+	private GameView view;
 	
-	Random rnd = new Random(System.currentTimeMillis());
-	int count = 0;
+	private Random rnd = new Random(System.currentTimeMillis());
+	private int count = 0;
 	
 	@SuppressWarnings("unchecked")
 	public GameController(GameObjectModel model, GameView view) 
@@ -79,12 +79,13 @@ public class GameController implements EventHandler
 							view.displayInfo.setText(view.informationFactory.getInformation(view.noOfDays).displayTextInfo());
 						}
 						
-						else
-						{
-							view.plantName.setText("");
-							view.displayDays.setText("");
-							view.displayInfo.setText("");
-						}					
+//						else
+//						{
+//							view.plantName.setText("");
+//							view.displayDays.setText("");
+//							view.displayInfo.setText("");
+//
+//						}					
 
 					}			
 					
@@ -143,7 +144,7 @@ public class GameController implements EventHandler
 						
 						//System.out.println("Intersected at: x= " + model.droplet.getX() + ", y= " + model.droplet.getY());
 						//System.out.println("Plant at: x= " + model.gameObject.getX() + ", y= " + model.gameObject.getY());
-						//System.out.println("Bounds: x= " + model.droplet.getRectangle().getBoundsInParent());
+						//System.out.println("Bounds: x= " + model.droplet.getRectangle().getBoundsInParent());					
 
 					} 
 

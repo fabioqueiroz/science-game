@@ -11,11 +11,12 @@ import mvc.GameView;
 
 public class ScienceProject extends Application
 {	
-	FlowPane root;
-	Scene scene;	
-	GameObjectModel model;
-	GameView view;
-	GameController controller;
+	private FlowPane root;
+	private Scene scene;	
+	private GameObjectModel model;
+	private GameView view;
+	@SuppressWarnings("unused")
+	private GameController controller;
 
 	public static void main(String[] args) 
 	{

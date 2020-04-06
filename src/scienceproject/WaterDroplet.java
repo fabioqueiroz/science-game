@@ -7,7 +7,8 @@ import javafx.scene.shape.Rectangle;
 public class WaterDroplet extends Cloud
 {
 
-	public WaterDroplet(double x, double y, GraphicsContext gc) {
+	public WaterDroplet(double x, double y, GraphicsContext gc) 
+	{
 		super(x, y, gc);
 		image = new Image(WaterDroplet.class.getResource("/resources/water-droplet.PNG").toExternalForm());
 		rectangle = new Rectangle(x, y-100, image.getWidth(), image.getHeight());

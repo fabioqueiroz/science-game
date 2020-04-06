@@ -24,7 +24,7 @@ public class InformationFactory
 			info = new YoungPlantInfo();
 			
 		} 
-		else if (age == 6) 
+		else if (age >= 6) 
 		{
 			info = new AdultPlantInfo();
 			

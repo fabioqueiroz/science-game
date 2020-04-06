@@ -6,7 +6,8 @@ import javafx.scene.image.Image;
 public class Cloud extends GameObject
 {
 
-	public Cloud(double x, double y, GraphicsContext gc) {
+	public Cloud(double x, double y, GraphicsContext gc) 
+	{
 		super(x, y, gc);
 		image = new Image(Cloud.class.getResource("/resources/clouds.jpg").toExternalForm());
 		update();
