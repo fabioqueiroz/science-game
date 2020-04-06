@@ -6,53 +6,53 @@ public class QuizTwoBuilder extends QuizBuilder
 	@Override
 	public void createQuestionOne() 
 	{
-		questionnaire.setQuestionOne("1) quiz 2, question 1");
+		questionnaire.setQuestionOne("1) What makes the leaves green?");
 		
 	}
 
 	@Override
 	public void createQuestionTwo() 
 	{
-		questionnaire.setQuestionTwo("2) quiz 2,  question 2");
+		questionnaire.setQuestionTwo("2) What's the name of the tiny holes on the leaf?");
 		
 	}
 
 	@Override
 	public void createQuestionThree() 
 	{
-		questionnaire.setQuestionThree("3) quiz 2, question 3");
+		questionnaire.setQuestionThree("3) Type of tree that loses its leaves every fall and grows new leaves each spring.");
 		
 	}
 
 	@Override
 	public void createQuestionFour() 
 	 {
-		questionnaire.setQuestionFour("4) quiz 2,  question 4");
+		questionnaire.setQuestionFour("4) Part of the seed that becomes the first leaves of a plant.");
 		
 	}
 
 	@Override
 	public void createAnswerOne()
 	{
-		questionnaire.setAnswerOne("ANSWER 2.1");
+		questionnaire.setAnswerOne("Stoma");
 	}
 	
 	@Override
 	public void createAnswerTwo()
 	{
-		questionnaire.setAnswerTwo("ANSWER 2.2");
+		questionnaire.setAnswerTwo("Chlorophyll");
 	}
 	
 	@Override
 	public void createAnswerThree()
 	{
-		questionnaire.setAnswerThree("ANSWER 2.3");
+		questionnaire.setAnswerThree("Epicotyl");
 	}
 	
 	@Override
 	public void createAnswerFour()
 	{
-		questionnaire.setAnswerFour("ANSWER 2.4");
+		questionnaire.setAnswerFour("Deciduous");
 	}
 
 }

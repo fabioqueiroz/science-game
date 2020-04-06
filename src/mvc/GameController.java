@@ -171,19 +171,19 @@ public class GameController implements EventHandler
 		public void changed(ObservableValue observable, Object oldValue, Object newValue) 
 		{
 						
-			if (observable.getValue().equals("Topic 1")) 
+			if (observable.getValue().equals("General")) 
 			{
 				view.quizBuilder = new QuizOneBuilder();
 
 			}
 			
-			if (observable.getValue().equals("Topic 2")) 
+			if (observable.getValue().equals("Leaves")) 
 			{
 				view.quizBuilder = new QuizTwoBuilder();
 
 			}
 			
-			if (observable.getValue().equals("Topic 3")) 
+			if (observable.getValue().equals("Energy")) 
 			{
 				view.quizBuilder = new QuizThreeBuilder();
 

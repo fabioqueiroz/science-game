@@ -6,53 +6,53 @@ public class QuizOneBuilder extends QuizBuilder
 	@Override
 	public void createQuestionOne() 
 	{
-		questionnaire.setQuestionOne("1) quiz 1, question 1");
+		questionnaire.setQuestionOne("1) The scientific study of plant life is known as what?");
 		
 	}
 	
 	@Override
 	public void createQuestionTwo() 
 	{
-		questionnaire.setQuestionTwo("2) quiz 1,  question 2");
+		questionnaire.setQuestionTwo("2) The process of plants using energy from sunlight is known as what?");
 		
 	}
 
 	@Override
 	public void createQuestionThree() 
 	{
-		questionnaire.setQuestionThree("3) quiz 1, question 3");
+		questionnaire.setQuestionThree("3) Name the movement of pollen from the anthers to the stigma of a flower.");
 		
 	}
 
 	@Override
 	public void createQuestionFour() 
 	 {
-		questionnaire.setQuestionFour("4) quiz 1,  question 4");
+		questionnaire.setQuestionFour("4) Name an agent that can transport pollen.");
 		
 	}
 	
 	@Override
 	public void createAnswerOne()
 	{
-		questionnaire.setAnswerOne("ANSWER 1.1");
+		questionnaire.setAnswerOne("Photosynthesis");
 	}
 	
 	@Override
 	public void createAnswerTwo()
 	{
-		questionnaire.setAnswerTwo("ANSWER 1.2");
+		questionnaire.setAnswerTwo("Botany");
 	}
 	
 	@Override
 	public void createAnswerThree()
 	{
-		questionnaire.setAnswerThree("ANSWER 1.3");
+		questionnaire.setAnswerThree("Wind");
 	}
 	
 	@Override
 	public void createAnswerFour()
 	{
-		questionnaire.setAnswerFour("ANSWER 1.4");
+		questionnaire.setAnswerFour("Pollination"); 
 	}
 	
 }

@@ -8,6 +8,7 @@ import crosscutting.DragAndDropEventGenerator;
 import factory.InformationFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -46,8 +47,9 @@ public class GameView
 	
 	GameObjectModel model;
 		
-	ObservableList<String> menuOptions = FXCollections.observableArrayList("Topic 1", "Topic 2", "Topic 3");
+	ObservableList<String> menuOptions = FXCollections.observableArrayList("General", "Leaves", "Energy");
 	
+	@SuppressWarnings("static-access")
 	public GameView(FlowPane root, GameObjectModel model) 
 	{
 		this.root = root;
@@ -90,16 +92,16 @@ public class GameView
 		ComponentGenerator.createTextBlock(displayInfo, 450, 200, 200, 20);
 		
 		// Create answers to be dragged
-		sourceOne = ComponentGenerator.createText(50, 200, "DRAG ME 1", "source");
-		sourceTwo = ComponentGenerator.createText(50, 250, "DRAG ME 2", "source");
-		sourceThree = ComponentGenerator.createText(50, 300, "DRAG ME 3", "source");
-		sourceFour = ComponentGenerator.createText(50, 350, "DRAG ME 4", "source"); 
+		sourceOne = ComponentGenerator.createText(40, 200, "", "source");
+		sourceTwo = ComponentGenerator.createText(40, 250, "", "source");
+		sourceThree = ComponentGenerator.createText(40, 300, "", "source");
+		sourceFour = ComponentGenerator.createText(40, 350, "", "source"); 
 		
 		// Create target destinations
-		targetOne = ComponentGenerator.createText(200, 450, "", "target");
-      	targetTwo = ComponentGenerator.createText(200, 500, "", "target");
-      	targetThree = ComponentGenerator.createText(200, 550, "", "target");
-      	targetFour = ComponentGenerator.createText(200, 600, "", "target");
+		targetOne = ComponentGenerator.createText(200, 400, "", "target");
+      	targetTwo = ComponentGenerator.createText(200, 450, "", "target");
+      	targetThree = ComponentGenerator.createText(200, 500, "", "target");
+      	targetFour = ComponentGenerator.createText(200, 550, "", "target");
 
       	// Create quiz menu
       	menu = new ComboBox<String>(menuOptions);
@@ -130,7 +132,7 @@ public class GameView
       	
       	// Quiz pane
       	shadowBoxPane.getChildren().addAll(shadowRectangle, displayQuestions); 
-      	//shadowBoxPane.setAlignment(displayQuestions, Pos.TOP_CENTER);
+      	shadowBoxPane.setAlignment(displayQuestions, Pos.TOP_CENTER);
       	
       	quizArea.getChildren().addAll(shadowBoxPane, targetOne, targetTwo, targetThree, targetFour, marks, checkAnswerButton);
       	     	
