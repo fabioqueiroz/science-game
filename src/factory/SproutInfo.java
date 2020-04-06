@@ -13,9 +13,9 @@ public class SproutInfo implements InformationInterface
 	@Override
 	public String displayTextInfo() 
 	{
-		return "Sprout: lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-				+ "Ut consequat sem diam, et tincidunt risus egestas vitae. "
-				+ "Sed pretium convallis leo, sagittis malesuada nisi dignissim ac.";
+		return "Sprout: It's a seed that is either germinated until it has formed a root or "
+				+ "until it has developed its first set of leaves.  "
+				+ "A sprout is a small growth on a plant — a little new bud.";
 	}
 
 }

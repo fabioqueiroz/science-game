@@ -13,9 +13,8 @@ public class YoungPlantInfo implements InformationInterface
 	@Override
 	public String displayTextInfo() 
 	{
-		return "Young plant: lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-				+ "Ut consequat sem diam, et tincidunt risus egestas vitae. "
-				+ "Sed pretium convallis leo, sagittis malesuada nisi dignissim ac.";
+		return "Young plant: A typical young seedling consists of three main parts: the radicle (embryonic root), "
+				+ "the hypocotyl (embryonic shoot), and the cotyledons (seed leaves). "; 
 	}
 
 }

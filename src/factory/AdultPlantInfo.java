@@ -12,9 +12,9 @@ public class AdultPlantInfo implements InformationInterface
 	@Override
 	public String displayTextInfo() 
 	{
-		return "Adult plant: lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-				+ "Ut consequat sem diam, et tincidunt risus egestas vitae. "
-				+ "Sed pretium convallis leo, sagittis malesuada nisi dignissim ac.";
+		return "Adult plant: It's now mature and has the ability to reproduce through spores or flowers. "
+				+ "After flowers are pollinated, they get bigger and turn into fruit with seeds inside, "
+				+ "so the cycle can start again.";
 	}
 
 }

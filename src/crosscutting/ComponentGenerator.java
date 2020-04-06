@@ -48,7 +48,7 @@ public class ComponentGenerator
 		text.setLayoutY(layoutY);
 		text.wrappingWidthProperty().set(maxWidth);
 		text.setFont(Font.font("verdana", FontWeight.NORMAL, FontPosture.REGULAR, fontSize));
-		text.setTextAlignment(TextAlignment.JUSTIFY);
+		text.setTextAlignment(TextAlignment.LEFT);
 
 	}
 	

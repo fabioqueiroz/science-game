@@ -14,9 +14,9 @@ public class SeedInfo implements InformationInterface
 	public String displayTextInfo() 
 	{
 		
-		return "Seed: lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-				+ "Ut consequat sem diam, et tincidunt risus egestas vitae. "
-				+ "Sed pretium convallis leo, sagittis malesuada nisi dignissim ac.";
+		return "Seed: Plants come from seeds after they are planted in the ground. "
+				+ "It's inside them that a process called germination occurs, in"
+				+ "which they take oxygen and minerals from the soil and water to grow.";
 	}
 
 	
