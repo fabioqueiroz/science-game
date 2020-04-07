@@ -78,15 +78,7 @@ public class GameController implements EventHandler
 							view.displayDays.setText(Integer.toString(view.noOfDays) + " days");
 							view.displayInfo.setText(view.informationFactory.getInformation(view.noOfDays).displayTextInfo());
 						}
-						
-//						else
-//						{
-//							view.plantName.setText("");
-//							view.displayDays.setText("");
-//							view.displayInfo.setText("");
-//
-//						}					
-
+							
 					}			
 					
 				});

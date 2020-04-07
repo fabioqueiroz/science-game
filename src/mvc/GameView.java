@@ -15,6 +15,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -37,6 +39,7 @@ public class GameView
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
 	Rectangle soil, grass, test, infoShadowRectangle, quizShadowRectangle;
 	InformationFactory informationFactory;
+	ImageView greenGrass;
 	ComboBox<String> menu;
 	ContentCreator content;
 	QuizBuilder quizBuilder;
@@ -77,13 +80,20 @@ public class GameView
 		resetButton = ComponentGenerator.createButton("Start again!", 20, 700); 
 		checkAnswerButton = ComponentGenerator.createButton("Check answers", 300, 700); 
 		
-		soil = ComponentGenerator.createRectangle(150, 5, "#3f2828", 190, 545);
-		grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
+		soil = ComponentGenerator.createRectangle(150, 25, "#3f2828", 190, 545);
+		//grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
 		test = ComponentGenerator.createRectangle(5, 650, "#ffffc8", 700, 5);
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
 		marks = ComponentGenerator.createLabel("", 100, 710);
+		
+		greenGrass = new ImageView(new Image("resources/grass.png"));
+		greenGrass.setFitHeight(300);
+		greenGrass.setFitWidth(700);
+		greenGrass.setLayoutY(330);
+
+
 			
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
@@ -132,7 +142,7 @@ public class GameView
      	// Build the solution     	
       	// Plant pane
       	infoShadowPane.getChildren().addAll(infoShadowRectangle, displayInfo);
-      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, grass, displayDays, infoShadowPane); // displayInfo
+      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, soil, greenGrass, displayDays, infoShadowPane); // grass
       	      	
       	// Menu pane
       	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);
