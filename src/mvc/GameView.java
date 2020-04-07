@@ -40,7 +40,7 @@ public class GameView
 	Label plantName, displayDays, marks;
 	Text displayInfo, displayQuestions;
 	Text sourceOne, sourceTwo, sourceThree, sourceFour, targetOne, targetTwo, targetThree, targetFour;
-	Rectangle soil, grass, test, infoShadowRectangle, quizShadowRectangle;
+	Rectangle soil, infoShadowRectangle, quizShadowRectangle;
 	InformationFactory informationFactory;
 	ImageView greenGrass;
 	ComboBox<String> menu;
@@ -87,8 +87,6 @@ public class GameView
 		checkAnswerButton = ComponentGenerator.createButton("Check answers", 300, 700); 
 		
 		soil = ComponentGenerator.createRectangle(150, 12, "#3f2828", 190, 545);
-		//grass = ComponentGenerator.createRectangle(650, 100, "#144e14", 10, 550);
-		test = ComponentGenerator.createRectangle(5, 650, "#ffffc8", 700, 5);
 		
 		plantName = ComponentGenerator.createLabel("Seed", 390, 510);
 		displayDays = ComponentGenerator.createLabel("", 550, 710);
@@ -99,7 +97,6 @@ public class GameView
 		greenGrass.setFitWidth(700);
 		greenGrass.setLayoutY(330);
 
-		// TEST
 		sun = new Circle();
         sun.setRadius(30);
         sun.setFill(Color.YELLOW);
@@ -110,8 +107,8 @@ public class GameView
         sunrise.setDuration(Duration.millis(10000));
         sunrise.setNode(sun);
         sunrise.setByY(-250);
-        sunrise.setByX(360);
-        sunrise.setCycleCount(300);
+        sunrise.setByX(560);
+        sunrise.setCycleCount(400);
 			
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
@@ -160,7 +157,7 @@ public class GameView
      	// Build the solution     	
       	// Plant pane
       	infoShadowPane.getChildren().addAll(infoShadowRectangle, displayInfo);
-      	plantArea.getChildren().addAll(canvas, sun, rainButton, daysButton, plantName, greenGrass, soil, displayDays, infoShadowPane); // grass
+      	plantArea.getChildren().addAll(canvas, sun, rainButton, daysButton, plantName, greenGrass, soil, displayDays, infoShadowPane);
       	      	
       	// Menu pane
       	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);
