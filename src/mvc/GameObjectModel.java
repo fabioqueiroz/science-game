@@ -2,10 +2,10 @@ package mvc;
 
 import java.util.ArrayList;
 
+import delegation.Seed;
 import javafx.scene.canvas.GraphicsContext;
 import scienceproject.Cloud;
 import scienceproject.GameObject;
-import scienceproject.Seed;
 
 public class GameObjectModel 
 {	

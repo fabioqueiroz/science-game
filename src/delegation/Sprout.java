@@ -1,9 +1,10 @@
-package scienceproject;
+package delegation;
 
 import interfaces.PlantInterface;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import scienceproject.GameObject;
 
 public class Sprout extends GameObject implements PlantInterface
 {

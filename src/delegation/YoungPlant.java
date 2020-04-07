@@ -1,17 +1,18 @@
-package scienceproject;
+package delegation;
 
 import interfaces.PlantInterface;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import scienceproject.GameObject;
 
-public class AdultPlant extends GameObject implements PlantInterface
+public class YoungPlant extends GameObject implements PlantInterface
 {
 
-	public AdultPlant(double x, double y, GraphicsContext gc) 
+	public YoungPlant(double x, double y, GraphicsContext gc) 
 	{
 		super(x, y, gc);
-		image = new Image(AdultPlant.class.getResource("/resources/plant.PNG").toExternalForm());
+		image = new Image(YoungPlant.class.getResource("/resources/sprout3.PNG").toExternalForm());
 		rectangle = new Rectangle(x, y-100, image.getWidth(), image.getHeight());
 		update();
 	}
@@ -20,7 +21,7 @@ public class AdultPlant extends GameObject implements PlantInterface
 	public void update() 
 	{
 		gc.drawImage(image, x, y-100, 140, 200);
-		
+			
 	}
 
 }

@@ -5,6 +5,7 @@ import builder.QuizOneBuilder;
 import builder.QuizThreeBuilder;
 import builder.QuizTwoBuilder;
 import crosscutting.QuizValidator;
+import delegation.Seed;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -13,7 +14,6 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import scienceproject.Cloud;
 import scienceproject.GameObject;
-import scienceproject.Seed;
 import scienceproject.WaterDroplet;
 
 @SuppressWarnings("rawtypes")
