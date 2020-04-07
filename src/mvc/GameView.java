@@ -6,6 +6,7 @@ import builder.QuizBuilder;
 import crosscutting.ComponentGenerator;
 import crosscutting.DragAndDropEventGenerator;
 import factory.InformationFactory;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -21,8 +22,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
 public class GameView 
@@ -49,6 +52,9 @@ public class GameView
 	int noOfDays;
 	
 	GameObjectModel model;
+	
+	Circle sun;
+	TranslateTransition sunrise;
 		
 	ObservableList<String> menuOptions = FXCollections.observableArrayList("General", "Leaves", "Energy");
 	
@@ -93,7 +99,19 @@ public class GameView
 		greenGrass.setFitWidth(700);
 		greenGrass.setLayoutY(330);
 
-
+		// TEST
+		sun = new Circle();
+        sun.setRadius(30);
+        sun.setFill(Color.YELLOW);
+        sun.setCenterX(-30);
+        sun.setCenterY(200);
+        
+        sunrise = new TranslateTransition();
+        sunrise.setDuration(Duration.millis(10000));
+        sunrise.setNode(sun);
+        sunrise.setByY(-250);
+        sunrise.setByX(360);
+        sunrise.setCycleCount(300);
 			
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
@@ -142,7 +160,7 @@ public class GameView
      	// Build the solution     	
       	// Plant pane
       	infoShadowPane.getChildren().addAll(infoShadowRectangle, displayInfo);
-      	plantArea.getChildren().addAll(canvas, rainButton, daysButton, plantName, greenGrass, soil, displayDays, infoShadowPane); // grass
+      	plantArea.getChildren().addAll(canvas, sun, rainButton, daysButton, plantName, greenGrass, soil, displayDays, infoShadowPane); // grass
       	      	
       	// Menu pane
       	menuArea.getChildren().addAll(menu, resetButton, sourceOne, sourceTwo, sourceThree, sourceFour);

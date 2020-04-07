@@ -48,7 +48,9 @@ public class GameController implements EventHandler
 		{
 			timer.start();
 					
-			view.isRainButtonClicked = true;	
+			view.isRainButtonClicked = true;
+			
+			view.sunrise.play();
 			
 		}
 	
