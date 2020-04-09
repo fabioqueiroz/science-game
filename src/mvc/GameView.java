@@ -113,7 +113,7 @@ public class GameView
 		// Allow specific information to be displayed
 		informationFactory = new InformationFactory();
 			
-		displayInfo = new Text(informationFactory.getInformation(0).displayTextInfo());
+		displayInfo = new Text(informationFactory.createInformation(0).displayTextInfo());
 		ComponentGenerator.createTextBlock(displayInfo, 450, 200, 200, 20);
 		
 		// Create answers to be dragged

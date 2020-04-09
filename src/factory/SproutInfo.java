@@ -1,8 +1,8 @@
 package factory;
 
-import interfaces.InformationInterface;
+import interfaces.PlantInfoInterface;
 
-public class SproutInfo implements InformationInterface
+public class SproutInfo implements PlantInfoInterface
 {
 	@Override
 	public String displayName() 

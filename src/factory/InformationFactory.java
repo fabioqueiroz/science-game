@@ -1,12 +1,13 @@
 package factory;
 
-import interfaces.InformationInterface;
+import interfaces.InfoFactoryInterface;
+import interfaces.PlantInfoInterface;
 
-public class InformationFactory 
+public class InformationFactory implements InfoFactoryInterface
 {
-	InformationInterface info;
+	PlantInfoInterface info;
 	
-	public InformationInterface getInformation(int age)
+	public PlantInfoInterface createInformation(int age)
 	{
 		if (age >= 0) 
 		{

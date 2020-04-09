@@ -76,9 +76,9 @@ public class GameController implements EventHandler
 																					
 						if(view.noOfDays >= 0 && view.noOfDays <= 6)
 						{
-							view.plantName.setText(view.informationFactory.getInformation(view.noOfDays).displayName());
+							view.plantName.setText(view.informationFactory.createInformation(view.noOfDays).displayName());
 							view.displayDays.setText(Integer.toString(view.noOfDays) + " days");
-							view.displayInfo.setText(view.informationFactory.getInformation(view.noOfDays).displayTextInfo());
+							view.displayInfo.setText(view.informationFactory.createInformation(view.noOfDays).displayTextInfo());
 						}
 							
 					}			

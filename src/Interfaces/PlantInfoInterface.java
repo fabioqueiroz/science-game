@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface InformationInterface 
+public interface PlantInfoInterface 
 {
 	String displayName();
 	String displayTextInfo();
