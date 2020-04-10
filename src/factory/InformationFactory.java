@@ -5,7 +5,7 @@ import interfaces.PlantInfoInterface;
 
 public class InformationFactory implements InfoFactoryInterface
 {
-	PlantInfoInterface info;
+	private PlantInfoInterface info;
 	
 	public PlantInfoInterface createInformation(int age)
 	{

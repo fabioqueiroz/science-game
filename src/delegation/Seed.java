@@ -8,7 +8,7 @@ import scienceproject.GameObject;
 
 public class Seed extends GameObject implements PlantInterface
 {
-	PlantInterface plantInterface;
+	private PlantInterface plantInterface;
 	protected int age = 0;
 
 	public Seed(double x, double y, GraphicsContext gc) 
@@ -38,18 +38,6 @@ public class Seed extends GameObject implements PlantInterface
 	@Override
 	public void update() 
 	{
-
-//		x++;	
-//		x += dx;
-//		if(x>800)
-//			dx=-1;
-//		if(x<0)
-//			dx=1;
-//		y+=dy;
-//		if(y>600)
-//			dy=-1;
-//		if(y<0)
-//			dy=1;
 
 		gc.drawImage(image, x, y, 120, 100);
 		

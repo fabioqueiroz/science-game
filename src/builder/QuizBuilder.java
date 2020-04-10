@@ -2,7 +2,7 @@ package builder;
 
 public abstract class QuizBuilder 
 {
-	Questionnaire questionnaire;
+	protected Questionnaire questionnaire;
 	
 	abstract void createQuestionOne();
 	abstract void createQuestionTwo();

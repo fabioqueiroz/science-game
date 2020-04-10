@@ -2,7 +2,7 @@ package builder;
 
 public class ContentCreator 
 {
-	QuizBuilder quizBuilder;
+	private QuizBuilder quizBuilder;
 	
 	public Questionnaire getQuestionnaire() 
 	{
