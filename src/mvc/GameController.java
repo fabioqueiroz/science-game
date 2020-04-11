@@ -1,5 +1,6 @@
 package mvc;
 
+import java.io.File;
 import java.util.Random;
 import builder.QuizOneBuilder;
 import builder.QuizThreeBuilder;
@@ -12,6 +13,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import scienceproject.Cloud;
 import scienceproject.GameObject;
 import scienceproject.WaterDroplet;
@@ -79,6 +83,14 @@ public class GameController implements EventHandler
 							view.plantName.setText(view.informationFactory.createInformation(view.noOfDays).displayName());
 							view.displayDays.setText(Integer.toString(view.noOfDays) + " days");
 							view.displayInfo.setText(view.informationFactory.createInformation(view.noOfDays).displayTextInfo());
+														
+							AudioClip noise = new AudioClip(this.getClass().getResource("/resources/growing.mp3").toExternalForm());
+							
+							if (view.noOfDays == 2 || view.noOfDays == 4 || view.noOfDays == 6) 
+							{
+								noise.play();
+							}
+
 						}
 							
 					}			
