@@ -50,11 +50,13 @@ public class GameController implements EventHandler
 		
 		if(event.getSource() == this.view.rainButton)
 		{
-			timer.start();
-					
-			view.isRainButtonClicked = true;
-			
+			timer.start();					
+			view.isRainButtonClicked = true;			
 			view.sunrise.play();
+			
+			AudioClip rain = new AudioClip(this.getClass().getResource("/resources/raindrops.mp3").toExternalForm());
+			rain.setCycleCount(AudioClip.INDEFINITE);
+			rain.play();
 			
 		}
 	
