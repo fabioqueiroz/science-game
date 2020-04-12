@@ -1,6 +1,5 @@
 package mvc;
 
-import java.io.File;
 import java.util.Random;
 import builder.QuizOneBuilder;
 import builder.QuizThreeBuilder;
@@ -14,8 +13,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import scienceproject.Cloud;
 import scienceproject.GameObject;
 import scienceproject.WaterDroplet;
