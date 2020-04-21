@@ -3,6 +3,13 @@ package factory;
 import interfaces.InfoFactoryInterface;
 import interfaces.PlantInfoInterface;
 
+/*
+ * This class is responsible for generating
+ * the concrete realisation of the classes involved
+ * in the implementation of the Factory Pattern.
+ * 
+ */
+
 public class InformationFactory implements InfoFactoryInterface
 {
 	private PlantInfoInterface info;
@@ -15,17 +22,17 @@ public class InformationFactory implements InfoFactoryInterface
 			
 		} 
 		
-		if (age >= 2 && age < 4) 
+		if (age >= 10 && age < 20) 
 		{
 			info = new SproutInfo();
 			
 		} 
-		if (age >= 4 && age < 6) 
+		if (age >= 20 && age < 30) 
 		{
 			info = new YoungPlantInfo();
 			
 		} 
-		else if (age >= 6) 
+		else if (age >= 30) 
 		{
 			info = new AdultPlantInfo();
 			

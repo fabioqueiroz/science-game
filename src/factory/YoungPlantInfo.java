@@ -2,6 +2,12 @@ package factory;
 
 import interfaces.PlantInfoInterface;
 
+/*
+ * This class is responsible for generating
+ * the information about the young plant.
+ * 
+ */
+
 public class YoungPlantInfo implements PlantInfoInterface
 {
 	@Override

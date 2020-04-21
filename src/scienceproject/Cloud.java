@@ -3,6 +3,12 @@ package scienceproject;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/*
+ * This class is responsible for defining
+ * a Cloud object.
+ * 
+ */
+
 public class Cloud extends GameObject
 {
 

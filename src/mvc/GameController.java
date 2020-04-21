@@ -77,7 +77,7 @@ public class GameController implements EventHandler
 					{
 						view.noOfDays++;
 																					
-						if(view.noOfDays >= 0 && view.noOfDays <= 6)
+						if(view.noOfDays >= 0 && view.noOfDays <= 30)
 						{
 							view.plantName.setText(view.informationFactory.createInformation(view.noOfDays).displayName());
 							view.displayDays.setText(Integer.toString(view.noOfDays) + " days");
@@ -85,7 +85,7 @@ public class GameController implements EventHandler
 														
 							AudioClip noise = new AudioClip(this.getClass().getResource("/resources/growing.mp3").toExternalForm());
 							
-							if (view.noOfDays == 2 || view.noOfDays == 4 || view.noOfDays == 6) 
+							if (view.noOfDays == 10 || view.noOfDays == 20 || view.noOfDays == 30) 
 							{
 								noise.play();
 							}

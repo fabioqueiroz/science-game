@@ -5,6 +5,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
+/*
+ * This class is responsible for defining a
+ * WaterDroplet object that simulates rain droplets.
+ * 
+ */
+
 public class WaterDroplet extends Cloud
 {
 

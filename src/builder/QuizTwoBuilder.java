@@ -1,5 +1,11 @@
 package builder;
 
+/*
+ * This class is responsible for defining the questions
+ * and answers of a quiz.
+ * 
+ */
+
 public class QuizTwoBuilder extends QuizBuilder
 {
 

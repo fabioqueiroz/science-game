@@ -8,6 +8,11 @@ import mvc.GameController;
 import mvc.GameObjectModel;
 import mvc.GameView;
 
+/*
+ * This class is responsible for launching
+ * the application.
+ * 
+ */
 
 public class ScienceProject extends Application
 {	

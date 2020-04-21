@@ -6,6 +6,14 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import scienceproject.GameObject;
 
+/*
+ * This class is responsible for defining a Seed object
+ * and delegates the creation of Sprout, YoungPlant and 
+ * AdultPlant objects via the common implemented interface,
+ * leveraging the use of the Delegation Pattern.
+ * 
+ */
+
 public class Seed extends GameObject implements PlantInterface
 {
 	private PlantInterface plantInterface;
@@ -48,17 +56,17 @@ public class Seed extends GameObject implements PlantInterface
 		age += 1;
 		
 
-		if (age == 2) 
+		if (age == 10) 
 		{
 			plantInterface = new Sprout(x,y,gc);
 		}
 		
-		if (age == 4) 
+		if (age == 20) 
 		{
 			plantInterface = new YoungPlant(x,y,gc);
 		}
 		
-		if (age == 6) 
+		if (age == 30) 
 		{
 			plantInterface = new AdultPlant(x,y,gc);
 		}

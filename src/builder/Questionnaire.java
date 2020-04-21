@@ -2,6 +2,12 @@ package builder;
 
 import java.util.ArrayList;
 
+/*
+ * This class is responsible for creating the questions
+ * and answers of a Questionnaire object.
+ * 
+ */
+
 public class Questionnaire 
 {
 	private String questionOne, questionTwo, questionThree, questionFour;

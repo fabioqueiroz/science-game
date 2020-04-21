@@ -6,6 +6,12 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import scienceproject.GameObject;
 
+/*
+ * This class is responsible for defining a Sprout object
+ * and its instantiation is responsibility of the Seed class.
+ * 
+ */
+
 public class Sprout extends GameObject implements PlantInterface
 {
 
