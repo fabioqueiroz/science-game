@@ -44,7 +44,8 @@ public class GameController implements EventHandler
 	@Override
 	public void handle(Event event) 
 	{
-		
+		// The animation starts and the user sees
+		// the simulation of the rain
 		if(event.getSource() == this.view.rainButton)
 		{
 			timer.start();					
@@ -53,10 +54,12 @@ public class GameController implements EventHandler
 			
 			AudioClip rain = new AudioClip(this.getClass().getResource("/resources/raindrops.mp3").toExternalForm());
 			rain.setCycleCount(AudioClip.INDEFINITE);
+			rain.setVolume(0.6);
 			rain.play();
 			
 		}
 	
+		// Allow the user to make the plant grow
 		if(event.getSource() == this.view.daysButton)
 		{
 			
@@ -100,6 +103,7 @@ public class GameController implements EventHandler
 		
 		}	
 		
+		// Allow the user to clear the answers and restart the quiz
 		if(event.getSource() == this.view.resetButton && view.quizBuilder != null)
 		{
 			
@@ -126,6 +130,8 @@ public class GameController implements EventHandler
 	AnimationTimer timer = new AnimationTimer() 
 	{
 
+		// Create the cloud and rain droplets objects and check
+		// when the later intersect the boundaries of the plant image
 		@Override
 		public void handle(long arg0) 
 		{
@@ -146,11 +152,7 @@ public class GameController implements EventHandler
 							.intersects(droplet.getX(), droplet.getY() - 80, droplet.getImage().getWidth(), droplet.getImage().getHeight())) 
 					{
 						((WaterDroplet)droplet).changeToBlankImage();
-						
-						//System.out.println("Intersected at: x= " + model.droplet.getX() + ", y= " + model.droplet.getY());
-						//System.out.println("Plant at: x= " + model.gameObject.getX() + ", y= " + model.gameObject.getY());
-						//System.out.println("Bounds: x= " + model.droplet.getRectangle().getBoundsInParent());					
-
+			
 					} 
 
 					else 
@@ -169,6 +171,8 @@ public class GameController implements EventHandler
 		
 	};
 	
+	// Allow the creation of the quiz selected by the user
+	// from the drop menu option
 	ChangeListener menuListener = new ChangeListener() 
 	{
 		

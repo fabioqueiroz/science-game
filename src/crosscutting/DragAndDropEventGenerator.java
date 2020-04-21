@@ -8,22 +8,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
+/*
+ * This class is responsible for creating the drag and drop targets.
+ * Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
+ * 
+ */
 public class DragAndDropEventGenerator 
 {
 	public static void DragAndDropCreator(Text source, Text target)
 	{
-		// Adapted from https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
 
         source.setOnDragDetected(new EventHandler<MouseEvent>() 
 		{
 		    public void handle(MouseEvent event) 
 		    {
-		        /* drag was detected, start a drag-and-drop gesture*/
-		        /* allow any transfer mode */
+		    	// Detect a dragging movement and starts
+		    	// the drag-and-drop gesture
 		        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
 		        
-		        /* Put a string on a dragboard */
+		        // Allow a string to be put on a dragboard
 		        ClipboardContent content = new ClipboardContent();
 		        content.putString(source.getText());
 		        db.setContent(content);
@@ -36,8 +39,8 @@ public class DragAndDropEventGenerator
         {
             public void handle(DragEvent event) 
             {
-                /* the drag and drop gesture ended */
-                /* if the data was successfully moved, clear it */
+            	// Detect that the drag-and-drop gesture ended and
+            	// if the data is correct it clears it
                 if (event.getTransferMode() == TransferMode.MOVE) 
                 {
                     source.setText("__________");
@@ -51,13 +54,13 @@ public class DragAndDropEventGenerator
 		{
 		    public void handle(DragEvent event) 
 		    {
-		        /* data is dragged over the target */
-		        /* accept it only if it is not dragged from the same node 
-		         * and if it has a string data */
+		        // Data is dragged over the target area. It's
+		        // accepted only if it's not dragged from the same node 
+		        // and if it has a string data
 		        if (event.getGestureSource() != target &&
 		                event.getDragboard().hasString()) 
 		        {
-		            /* allow for both copying and moving, whatever user chooses */
+		            // Allow both copying and moving
 		            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
 		        }
 		        
@@ -69,8 +72,8 @@ public class DragAndDropEventGenerator
 		{
 		    public void handle(DragEvent event) 
 		    {
-		    /* the drag-and-drop gesture entered the target */
-		    /* show to the user that it is an actual gesture target */
+		    	// Detect that the drag-and-drop gesture entered the target area
+		    	// and also show to the user that it is an actual gesture target 
 		         if (event.getGestureSource() != target &&
 		                 event.getDragboard().hasString()) 
 		         {
@@ -85,7 +88,7 @@ public class DragAndDropEventGenerator
 		{
 		    public void handle(DragEvent event) 
 		    {
-		        /* mouse moved away, remove the graphical cues */
+		        // If the mouse moves away, remove any graphical cue
 		        target.setFill(Color.BLACK);
 
 		        event.consume();
@@ -96,8 +99,8 @@ public class DragAndDropEventGenerator
 		{
 		    public void handle(DragEvent event) 
 		    {
-		        /* data dropped */
-		        /* if there is a string data on dragboard, read it and use it */
+		        // The data is dropped by the user. If there is 
+		        // a string data on dragboard, read it and use it
 		        Dragboard db = event.getDragboard();
 		        boolean success = false;
 		        if (db.hasString()) 
@@ -105,8 +108,9 @@ public class DragAndDropEventGenerator
 		           target.setText(db.getString());
 		           success = true;
 		        }
-		        /* let the source know whether the string was successfully 
-		         * transferred and used */
+		        
+		        // Let the source know whether the string   
+		        // was successfully transferred and used 
 		        event.setDropCompleted(success);
 		        
 		        event.consume();
